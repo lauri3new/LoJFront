@@ -22108,7 +22108,6 @@
 	    return _react2.default.createElement(
 	        "div",
 	        null,
-	        _react2.default.createElement(_header2.default, null),
 	        _react2.default.createElement(_gallery2.default, null)
 	    )
 	    //<Footer/>
@@ -29315,17 +29314,28 @@
 	var Gallery = function (_React$Component) {
 	  _inherits(Gallery, _React$Component);
 	
-	  function Gallery() {
+	  function Gallery(props) {
 	    _classCallCheck(this, Gallery);
 	
-	    return _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props));
+	
+	    _this.state = {
+	      style: _gallery2.default.pinky
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(Gallery, [{
+	    key: "handleClick",
+	    value: function handleClick() {
+	      this.setState({
+	        style: _gallery2.default.enterActive
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.props.getInit('clubs/arsenal');
-	      console.log("hello");
 	    }
 	  }, {
 	    key: "render",
@@ -29344,18 +29354,32 @@
 	              transitionName: _gallery2.default,
 	              transitionLeaveTimeout: 500 },
 	            this.props.products.map(function (product, i) {
-	              return _react2.default.createElement(_product2.default, { key: product.ID, boxStyle: _gallery2.default.box, onClick: function onClick() {
+	              return _react2.default.createElement(_product2.default, { key: product.ID, style: _this2.state.style, boxStyle: _gallery2.default.box, onClick: function onClick() {
 	                  return _this2.props.selectWinner();
 	                }, image: product.ImageLink, URL: product.buyLink, Price: product.Price });
 	            })
 	          )
 	        ),
 	        _react2.default.createElement(
+	          "div",
+	          { className: this.state.style },
+	          " helokokohe he he ",
+	          this.state.style
+	        ),
+	        _react2.default.createElement(
 	          "button",
 	          { onClick: function onClick() {
-	              return _this2.props.getProducts();
+	              _this2.props.getProducts();
+	              _this2.handleClick();
 	            } },
 	          "click me"
+	        ),
+	        _react2.default.createElement(
+	          "button",
+	          { onClick: function onClick() {
+	              return _this2.handleClick();
+	            } },
+	          "click me blue"
 	        )
 	      );
 	    }
@@ -29371,7 +29395,7 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    products: state.products.slice(0, 2)
+	    products: state.products.slice(0, 4)
 	  };
 	};
 	
@@ -29417,7 +29441,7 @@
 	var Product = function Product(props) {
 	  return _react2.default.createElement(
 	    "div",
-	    { className: props.boxStyle },
+	    { className: [props.boxStyle, props.style].join(' ') },
 	    _react2.default.createElement(
 	      "div",
 	      { className: _product2.default.inner },
@@ -29437,8 +29461,9 @@
 	            { href: props.URL, target: "_blank" },
 	            _react2.default.createElement(
 	              "div",
-	              { className: _product2.default.link },
-	              props.Price
+	              null,
+	              "eheheh ",
+	              props.style
 	            )
 	          )
 	        )
@@ -29541,13 +29566,15 @@
 	
 	
 	// module
-	exports.push([module.id, ".gallery__gallery___2XUnX {\n  margin-top:100px;\n  max-width: 1000px;\n  min-width: 500px;\n  height: 50vw;\n  max-height: 550px;\n  width:90%;\n  margin-left: 5%;\n  overflow: hidden;\n}\n\n.gallery__enter___1HEXa {\n  transform: translateY(100%);\n  opacity: 0;\n}\n\n.gallery__enter___1HEXa.gallery__enterActive___3ZSVG {\n  animation: gallery__slide-in___20LGT 500ms forwards;\n}\n\n@keyframes gallery__slide-in___20LGT {\n  from {\n  transform: translateY(100%);\n  opacity: 0;\n  }\n  to {\n  transform: translateY(0%);\n  opacity: 1;\n  }\n}\n\n.gallery__leave___3Xxj6 {\ntransform: translateY(-100%);\n}\n\n.gallery__leave___3Xxj6.gallery__leaveActive___2G32H {\n  animation: gallery__slide-out___2XAn4 500ms forwards;\n}\n\n@keyframes gallery__slide-out___2XAn4 {\n  from {\n  transform: translateY(-100%);\n  opacity: 1;\n  }\n  to {\n  transform: translateY(-200%);\n  opacity: 0;\n  }\n}\n\n.gallery__box___3ng60 {\n  width: 50%;\n  padding-bottom: 50%;\n  position: relative;\n  float: left;\n  background-size:cover;\n  background-repeat: no-repeat;\n}\n", ""]);
+	exports.push([module.id, ".gallery__gallery___2XUnX {\n  margin-top:100px;\n  max-width: 1000px;\n  min-width: 500px;\n  height: 50vw;\n  max-height: 550px;\n  width:90%;\n  margin-left: 5%;\n  position: fixed;\n}\n\n.gallery__pinky___1ypUc {\n}\n\n.gallery__enter___1HEXa {\n  transform: translateY(100%);\n  opacity: 0;\n}\n\n.gallery__enterActive___3ZSVG {\n\n  height: 100px;\n  width: 100px;\n  animation: gallery__slide-inn___9McVh 500ms;\n}\n\n.gallery__enter___1HEXa.gallery__enterActive___3ZSVG {\n  animation: gallery__slide-in___20LGT 500ms forwards;\n}\n\n@keyframes gallery__slide-inn___9McVh {\n  from {\n  transform: translateY(0%);\n  opacity: 0;\n  }\n  to {\n  transform: translateY(-100%);\n  opacity: 1;\n  }\n}\n\n@keyframes gallery__slide-in___20LGT {\n  from {\n  transform: translateY(100%);\n  opacity: 0;\n  }\n  to {\n  transform: translateY(0%);\n  opacity: 1;\n  }\n}\n\n.gallery__leave___3Xxj6 {\ntransform: translateY(-100%);\nopacity: 1;\n}\n\n.gallery__leave___3Xxj6.gallery__leaveActive___2G32H {\n  animation: gallery__slide-out___2XAn4 500ms forwards;\n}\n\n@keyframes gallery__slide-out___2XAn4 {\n  from {\n  transform: translateY(0%);\n  opacity: 1;\n  }\n  to {\n  transform: translateY(-100%);\n  opacity: 0;\n  }\n}\n\n.gallery__box___3ng60 {\n  width: 50%;\n  padding-bottom: 50%;\n  position: fixed;\n  background-size:cover;\n  background-repeat: no-repeat;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
 		"gallery": "gallery__gallery___2XUnX",
+		"pinky": "gallery__pinky___1ypUc",
 		"enter": "gallery__enter___1HEXa",
 		"enterActive": "gallery__enterActive___3ZSVG",
+		"slide-inn": "gallery__slide-inn___9McVh",
 		"slide-in": "gallery__slide-in___20LGT",
 		"leave": "gallery__leave___3Xxj6",
 		"leaveActive": "gallery__leaveActive___2G32H",

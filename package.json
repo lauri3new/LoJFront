@@ -13,7 +13,6 @@
     "reactjs"
   ],
   "author": "Laurence Newman",
-  "license": "MIT",
   "dependencies": {
     "normalizr": "^2.2.1",
     "react": "^15.2.1",
