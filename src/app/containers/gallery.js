@@ -3,13 +3,13 @@ import Product from "../components/product.js";
 import Styles from "./gallery.css";
 import { connect } from "react-redux";
 import { getData, selectWinner } from "../actions/actions.js";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      style : Styles.pinky
+      style : Styles.enterActive
     }
   };
   handleClick() {
@@ -26,9 +26,10 @@ render() {
   <div>
   <div className={Styles.gallery}>
   <ReactCSSTransitionGroup
-          transitionName={Styles}
-          transitionLeaveTimeout={500}>
-  {this.props.products.map((product,i) => {return <Product key={product.ID} style={this.state.style} boxStyle={Styles.box} onClick={() => this.props.selectWinner()} image={product.ImageLink} URL={product.buyLink} Price={product.Price}/>})}
+  transitionName={Styles}
+  transitionEnter={false}
+  transitionLeaveTimeout={500}>
+  {this.props.products.map((product,i) => {return <Product key={product.ID.toString()} style={product.ok ? this.state.style : null} boxStyle={Styles.box} onClick={() => {this.props.selectWinner(product.ID); handleClick()}} image={product.ImageLink} URL={product.buyLink} Price={product.Price}/>})}
   </ReactCSSTransitionGroup>
   </div>
   <div className={this.state.style}> helokokohe he he {this.state.style}</div>
@@ -45,7 +46,7 @@ render() {
 // use in this component (users, error obj) and to which local properties we want to map them,
 // so that they are accessible in from this.props
 const mapStateToProps = (state) => ({
-    products: state.products.slice(0,4)
+    products: state.products
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -56,8 +57,8 @@ const mapDispatchToProps = (dispatch) => {
       getInit(p) {
       dispatch(getData(p))
       },
-      selectWinner() {
-      dispatch(selectWinner())
+      selectWinner(ID) {
+      dispatch(selectWinner(ID))
       }
   }
 };

@@ -9,11 +9,8 @@
   position: fixed;
 }
 
-.pinky {
-}
 
 .enter {
-  transform: translateY(100%);
   opacity: 0;
 }
 
@@ -21,52 +18,36 @@
 
   height: 100px;
   width: 100px;
-  animation: slide-inn 500ms;
+  animation: fade-in 1000ms forwards;
 }
 
-.enter.enterActive {
-  animation: slide-in 500ms forwards;
-}
-
-@keyframes slide-inn {
-  from {
-  transform: translateY(0%);
+@keyframes fade-in {
+  0% {
   opacity: 0;
   }
-  to {
-  transform: translateY(-100%);
-  opacity: 1;
-  }
-}
-
-@keyframes slide-in {
-  from {
-  transform: translateY(100%);
+  50% {
   opacity: 0;
   }
-  to {
-  transform: translateY(0%);
+  100% {
   opacity: 1;
   }
 }
 
 .leave {
-transform: translateY(-100%);
 opacity: 1;
 }
 
 .leave.leaveActive {
-  animation: slide-out 500ms forwards;
+  animation: fade-out 500ms forwards;
 }
 
-@keyframes slide-out {
-  from {
-  transform: translateY(0%);
+@keyframes fade-out {
+  0% {
   opacity: 1;
   }
-  to {
-  transform: translateY(-100%);
+  100% {
   opacity: 0;
+  transform: translateY(-100%);
   }
 }
 
@@ -76,4 +57,5 @@ opacity: 1;
   position: fixed;
   background-size:cover;
   background-repeat: no-repeat;
+  opacity: 0;
 }

@@ -29320,7 +29320,7 @@
 	    var _this = _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props));
 	
 	    _this.state = {
-	      style: _gallery2.default.pinky
+	      style: _gallery2.default.enterActive
 	    };
 	    return _this;
 	  }
@@ -29352,10 +29352,11 @@
 	            _reactAddonsCssTransitionGroup2.default,
 	            {
 	              transitionName: _gallery2.default,
+	              transitionEnter: false,
 	              transitionLeaveTimeout: 500 },
 	            this.props.products.map(function (product, i) {
-	              return _react2.default.createElement(_product2.default, { key: product.ID, style: _this2.state.style, boxStyle: _gallery2.default.box, onClick: function onClick() {
-	                  return _this2.props.selectWinner();
+	              return _react2.default.createElement(_product2.default, { key: product.ID.toString(), style: product.ok ? _this2.state.style : null, boxStyle: _gallery2.default.box, onClick: function onClick() {
+	                  _this2.props.selectWinner(product.ID);handleClick();
 	                }, image: product.ImageLink, URL: product.buyLink, Price: product.Price });
 	            })
 	          )
@@ -29395,7 +29396,7 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    products: state.products.slice(0, 4)
+	    products: state.products
 	  };
 	};
 	
@@ -29407,8 +29408,8 @@
 	    getInit: function getInit(p) {
 	      dispatch((0, _actions.getData)(p));
 	    },
-	    selectWinner: function selectWinner() {
-	      dispatch((0, _actions.selectWinner)());
+	    selectWinner: function selectWinner(ID) {
+	      dispatch((0, _actions.selectWinner)(ID));
 	    }
 	  };
 	};
@@ -29566,19 +29567,17 @@
 	
 	
 	// module
-	exports.push([module.id, ".gallery__gallery___2XUnX {\n  margin-top:100px;\n  max-width: 1000px;\n  min-width: 500px;\n  height: 50vw;\n  max-height: 550px;\n  width:90%;\n  margin-left: 5%;\n  position: fixed;\n}\n\n.gallery__pinky___1ypUc {\n}\n\n.gallery__enter___1HEXa {\n  transform: translateY(100%);\n  opacity: 0;\n}\n\n.gallery__enterActive___3ZSVG {\n\n  height: 100px;\n  width: 100px;\n  animation: gallery__slide-inn___9McVh 500ms;\n}\n\n.gallery__enter___1HEXa.gallery__enterActive___3ZSVG {\n  animation: gallery__slide-in___20LGT 500ms forwards;\n}\n\n@keyframes gallery__slide-inn___9McVh {\n  from {\n  transform: translateY(0%);\n  opacity: 0;\n  }\n  to {\n  transform: translateY(-100%);\n  opacity: 1;\n  }\n}\n\n@keyframes gallery__slide-in___20LGT {\n  from {\n  transform: translateY(100%);\n  opacity: 0;\n  }\n  to {\n  transform: translateY(0%);\n  opacity: 1;\n  }\n}\n\n.gallery__leave___3Xxj6 {\ntransform: translateY(-100%);\nopacity: 1;\n}\n\n.gallery__leave___3Xxj6.gallery__leaveActive___2G32H {\n  animation: gallery__slide-out___2XAn4 500ms forwards;\n}\n\n@keyframes gallery__slide-out___2XAn4 {\n  from {\n  transform: translateY(0%);\n  opacity: 1;\n  }\n  to {\n  transform: translateY(-100%);\n  opacity: 0;\n  }\n}\n\n.gallery__box___3ng60 {\n  width: 50%;\n  padding-bottom: 50%;\n  position: fixed;\n  background-size:cover;\n  background-repeat: no-repeat;\n}\n", ""]);
+	exports.push([module.id, ".gallery__gallery___2XUnX {\n  margin-top:100px;\n  max-width: 1000px;\n  min-width: 500px;\n  height: 50vw;\n  max-height: 550px;\n  width:90%;\n  margin-left: 5%;\n  position: fixed;\n}\n\n\n.gallery__enter___1HEXa {\n  opacity: 0;\n}\n\n.gallery__enterActive___3ZSVG {\n\n  height: 100px;\n  width: 100px;\n  animation: gallery__fade-in___2gLRL 1000ms forwards;\n}\n\n@keyframes gallery__fade-in___2gLRL {\n  0% {\n  opacity: 0;\n  }\n  50% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n.gallery__leave___3Xxj6 {\nopacity: 1;\n}\n\n.gallery__leave___3Xxj6.gallery__leaveActive___2G32H {\n  animation: gallery__fade-out___3YU8C 500ms forwards;\n}\n\n@keyframes gallery__fade-out___3YU8C {\n  0% {\n  opacity: 1;\n  }\n  100% {\n  opacity: 0;\n  transform: translateY(-100%);\n  }\n}\n\n.gallery__box___3ng60 {\n  width: 50%;\n  padding-bottom: 50%;\n  position: fixed;\n  background-size:cover;\n  background-repeat: no-repeat;\n  opacity: 0;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
 		"gallery": "gallery__gallery___2XUnX",
-		"pinky": "gallery__pinky___1ypUc",
 		"enter": "gallery__enter___1HEXa",
 		"enterActive": "gallery__enterActive___3ZSVG",
-		"slide-inn": "gallery__slide-inn___9McVh",
-		"slide-in": "gallery__slide-in___20LGT",
+		"fade-in": "gallery__fade-in___2gLRL",
 		"leave": "gallery__leave___3Xxj6",
 		"leaveActive": "gallery__leaveActive___2G32H",
-		"slide-out": "gallery__slide-out___2XAn4",
+		"fade-out": "gallery__fade-out___3YU8C",
 		"box": "gallery__box___3ng60"
 	};
 
@@ -29634,16 +29633,16 @@
 	  };
 	};
 	
-	var selectWinner = exports.selectWinner = function selectWinner() {
+	var selectWinner = exports.selectWinner = function selectWinner(ID) {
 	  return function (dispatch) {
-	    dispatch(chosenShirt());
+	    dispatch(chosenShirt(ID));
 	  };
 	};
 	
-	var chosenShirt = function chosenShirt() {
+	var chosenShirt = function chosenShirt(ID) {
 	  return {
 	    type: "SHIRT_CHOSEN",
-	    payload: "okokok"
+	    payload: "okokok " + ID
 	  };
 	};
 
@@ -32935,13 +32934,19 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var productsReducer = function productsReducer() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	  var action = arguments[1];
 	
 	  switch (action.type) {
 	    case "GET_PRODUCTS_SUCCESS":
-	      return state.slice(2, 6).concat(action.payload);
+	      return state.concat(action.payload).slice(1, -1).map(function (a, i) {
+	        if (i === 0) {
+	          return _extends({}, a, { ok: true });
+	        } else return _extends({}, a, { ok: false });
+	      });
 	      break;
 	  }
 	  return state;

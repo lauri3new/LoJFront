@@ -34,13 +34,13 @@ const getRequestFailure = (err) => ({
   payload: err.message || "Something went wrong"
 })
 
-export const selectWinner = () => {
+export const selectWinner = (ID) => {
   return (dispatch) => {
-    dispatch(chosenShirt())
+    dispatch(chosenShirt(ID))
   }
 }
 
-const chosenShirt = () => ({
+const chosenShirt = (ID) => ({
   type : `SHIRT_CHOSEN`,
-  payload : `okokok`
+  payload : `okokok ${ID}`
 })
