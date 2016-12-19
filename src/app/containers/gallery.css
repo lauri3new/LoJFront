@@ -9,23 +9,24 @@
   position: fixed;
 }
 
+.opacityZero {
+  opacity: 0
+}
+
 
 .enter {
   opacity: 0;
 }
 
 .enterActive {
-
-  height: 100px;
-  width: 100px;
-  animation: fade-in 1000ms forwards;
+  animation: fade-in 750ms forwards;
 }
 
 @keyframes fade-in {
   0% {
   opacity: 0;
   }
-  50% {
+  66% {
   opacity: 0;
   }
   100% {
@@ -47,7 +48,6 @@ opacity: 1;
   }
   100% {
   opacity: 0;
-  transform: translateY(-100%);
   }
 }
 

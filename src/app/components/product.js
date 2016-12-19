@@ -2,20 +2,15 @@ import React from "react";
 import Styles from "./product.css";
 
 const Product = (props) => (
+<div style={props.styl}>
   <div className={[props.boxStyle,props.style].join(' ')}>
     <div className={Styles.inner}>
       <div className={Styles.boximage} style={{backgroundImage: `url("${props.image}")`}}>
-        <div className={Styles.shader}>
-          <button onClick={props.onClick}>HELLO sire</button>
-          <a href={props.URL} target='_blank'>
-            <div >
-            eheheh {props.style}
-            </div>
-          </a>
-        </div>
+          <button onClick={() => {console.log('okokoko'); props.onClick(props.ID)}}>HELLO sire</button>
       </div>
     </div>
   </div>
+</div>
 );
 
 export default Product;
