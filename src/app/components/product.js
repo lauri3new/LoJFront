@@ -2,11 +2,11 @@ import React from "react";
 import Styles from "./product.css";
 
 const Product = (props) => (
-<div style={props.styl}>
+<div style={props.leftRight}>
   <div className={[props.boxStyle,props.style].join(' ')}>
     <div className={Styles.inner}>
       <div className={Styles.boximage} style={{backgroundImage: `url("${props.image}")`}}>
-          <button onClick={() => {console.log('okokoko'); props.onClick(props.ID)}}>HELLO sire</button>
+          <button onClick={() => {props.onClick(props.ID)}}>Select Winner</button>
       </div>
     </div>
   </div>
