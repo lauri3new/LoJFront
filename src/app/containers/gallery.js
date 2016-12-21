@@ -29,20 +29,25 @@ render() {
       <ReactCSSTransitionGroup
         transitionName={Styles}
         transitionEnter={false}
-        transitionLeaveTimeout={500}>
+        transitionLeaveTimeout={1000}>
       {this.props.products.map((twoProducts,i) => {
         return <TwoProducts
+                  classNom={Styles.gallery}
                   key={twoProducts[0].ID}
                   keyo={i}
                   products={twoProducts}
                   stylee={Styles}
                   style={this.state}
-                  boxStyle={Styles.box}
-                  onClick={(id) => this.props.selectWinner(id)}
+                  onClick={(id) => {
+                    this.props.selectWinner(id);
+                    this.props.getProducts();
+                  }}
                 />})}
       </ReactCSSTransitionGroup>
     </div>
-      <button onClick={() => {
+      <button
+      className="btn btn-default"
+      onClick={() => {
       this.props.getProducts();
       this.handleClick();
       }}>

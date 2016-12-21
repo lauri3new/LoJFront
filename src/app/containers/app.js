@@ -10,7 +10,7 @@ import Header from "../components/header.js";
 const App = (props) => {
     return(
       <div>
-          {/* <Header/> */}
+          <Header/> 
           <Gallery/>
       </div>
         //<Footer/>

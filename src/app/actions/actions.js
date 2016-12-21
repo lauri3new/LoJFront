@@ -1,4 +1,4 @@
-export const getData = (path = "random") => {
+export const getData = (path = "random/") => {
   let baseUrl = "http://localhost:3001/";
   return (dispatch) => {
     dispatch(getRequest());

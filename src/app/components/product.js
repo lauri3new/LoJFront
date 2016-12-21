@@ -1,16 +1,36 @@
 import React from "react";
 import Styles from "./product.css";
 
-const Product = (props) => (
-<div style={props.leftRight}>
-  <div className={[props.boxStyle,props.style].join(' ')}>
-    <div className={Styles.inner}>
-      <div className={Styles.boximage} style={{backgroundImage: `url("${props.image}")`}}>
-          <button onClick={() => {props.onClick(props.ID)}}>Select Winner</button>
+class Product extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicked : false
+    }
+  };
+  handleClick() {
+    this.setState({
+      clicked : true,
+      style : `${Styles.noClicks}`
+    })
+    setTimeout( () => {this.setState({
+      clicked : false
+    })},1000)
+  }
+render() {
+  return (
+<div className={this.props.boxStyle}>
+  <div className={this.props.style}>
+  <div className={Styles.btntainer}>
+  <button className={`btn btn-default ${Styles.fifty} ${this.state.style}`} onClick={() => {this.handleClick();this.props.onClick(this.props.ID)}}>Winner</button>
+  <button className={`btn btn-default ${Styles.fifty}`}> more info </button>
+  </div>
+      <div className={Styles.boximage} style={{backgroundImage: `url("${this.props.image}")`}}>
+        {this.state.clicked == true ? <span className={`glyphicon glyphicon-heart + ${Styles.heart}`}></span> : null}
       </div>
-    </div>
   </div>
 </div>
-);
+)};
+};
 
 export default Product;

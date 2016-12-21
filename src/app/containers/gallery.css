@@ -1,32 +1,29 @@
 .gallery {
+  display: block;
   margin-top:100px;
-  max-width: 1000px;
+  max-width: 800px;
   min-width: 500px;
   height: 50vw;
+  min-height: 300px;
   max-height: 550px;
   width:90%;
   margin-left: 5%;
-  position: fixed;
 }
 
 .opacityZero {
   opacity: 0
 }
 
-
-.enter {
-  opacity: 0;
-}
-
 .enterActive {
-  animation: fade-in 750ms forwards;
+  animation: fade-in 1500ms forwards;
+
 }
 
 @keyframes fade-in {
   0% {
   opacity: 0;
   }
-  66% {
+  67% {
   opacity: 0;
   }
   100% {
@@ -39,23 +36,17 @@ opacity: 1;
 }
 
 .leave.leaveActive {
-  animation: fade-out 500ms forwards;
+  animation: fade-out 1000ms forwards;
 }
 
 @keyframes fade-out {
   0% {
   opacity: 1;
   }
+  50% {
+  opacity: 1;
+  }
   100% {
   opacity: 0;
   }
-}
-
-.box {
-  width: 50%;
-  padding-bottom: 50%;
-  position: fixed;
-  background-size:cover;
-  background-repeat: no-repeat;
-  opacity: 0;
 }

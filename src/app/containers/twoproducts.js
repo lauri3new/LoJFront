@@ -1,16 +1,15 @@
 import React from "react";
 import Product from "../components/product.js";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Styles from "./twoproducts.css";
 
 const TwoProducts = (props) => (
-  <div>
+  <div className={Styles.twoProducts}>
   {props.products.map((product,i) => {
     return <Product
               onClick={props.onClick}
-              leftRight={i == 0 ? {marginLeft: '50%' } : null}
               key={i.toString()}
               style={ (props.keyo==0) ? props.style.style : props.style.styleB}
-              boxStyle={props.boxStyle}
+              boxStyle={Styles.box}
               image={product.ImageLink}
               URL={product.buyLink}
               Price={product.Price}
