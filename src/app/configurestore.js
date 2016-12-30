@@ -1,8 +1,8 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import Reducer from "./reducers/index.js";
-import { loadState, saveState } from "./localStorage.js";
+import Reducer from "./reducers/index";
+import { loadState, saveState } from "./localStorage";
 
 // configureStore creates store from root reducer, persistedState allows state
 // to be stored in browser local storage, applying middleware logger (for dev)
@@ -13,13 +13,13 @@ const configureStore = () => {
   const store = createStore(
     Reducer,
     persistedState,
-    applyMiddleware(logger(),thunk));
-  store.subscribe( () => {
+    applyMiddleware(logger(), thunk)
+  );
+  store.subscribe(() => {
     saveState({
       users: store.getState().users
+    });
   });
-});
-
   return store;
 };
 

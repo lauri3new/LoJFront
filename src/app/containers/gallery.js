@@ -1,81 +1,53 @@
 import React from "react";
-import TwoProducts from "./TwoProducts.js"
-import Styles from "./gallery.css";
 import { connect } from "react-redux";
-import { getData, selectWinner } from "../actions/actions.js";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { getData } from "../actions/actions";
 
 class Gallery extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      style : Styles.enterActive,
-      styleB : Styles.opacityZero
-    }
-  };
-  handleClick() {
-    this.setState({
-      style : Styles.enterActive
-    })
-  }
-  componentDidMount() {
-      this.props.getInit()
-    };
+  // componentDidMount() {
+  //   this.props.getInit('gallery/0');
+  // }
 
-render() {
-  return (
-  <div>
-    <div className={Styles.gallery}>
-      <ReactCSSTransitionGroup
-        transitionName={Styles}
-        transitionEnter={false}
-        transitionLeaveTimeout={1000}>
-      {this.props.products.map((twoProducts,i) => {
-        return <TwoProducts
-                  classNom={Styles.gallery}
-                  key={twoProducts[0].ID}
-                  keyo={i}
-                  products={twoProducts}
-                  stylee={Styles}
-                  style={this.state}
-                  onClick={(id) => {
-                    this.props.selectWinner(id);
-                    this.props.getProducts();
-                  }}
-                />})}
-      </ReactCSSTransitionGroup>
-    </div>
-      <button
-      className="btn btn-default"
-      onClick={() => {
-      this.props.getProducts();
-      this.handleClick();
-      }}>
-        click me
-      </button>
-  </div>
-)};
+  render() {
+    return (
+      <div>
+        <div>
+          { this.props.products.map((product, i) => {
+            return (
+              <div>
+                {`${i} and ${product.Title}`}
+              </div>
+            );
+          })}
+        </div>
+        <button onClick={() => {}}>
+          click me
+        </button>
+      </div>
+    );
+  }
 }
+
+Gallery.propTypes = {
+  products: React.PropTypes.object,
+  // getInit: React.PropTypes.func
+};
 
 // mapStateToProps tells React which properties of global state do we want to
 // use in this component (users, error obj) and to which local properties we want to map them,
 // so that they are accessible in from this.props
-const mapStateToProps = (state) => ({
-    products: state.products
+const mapStateToProps = state => ({
+  products: state.products
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      getProducts() {
-      dispatch(getData())
-      },
-      getInit(p) {
-      dispatch(getData(p))
-      },
-      selectWinner(id) {
-      dispatch(selectWinner(id))
-      }
-  }
+    getProducts(id) {
+      dispatch(getData(id));
+    },
+    getInit(p) {
+      dispatch(getData(p));
+    },
+  };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Gallery);
+export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

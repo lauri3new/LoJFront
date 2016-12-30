@@ -4,11 +4,12 @@
 
 import React from "react";
 import { render } from "react-dom";
-import Root from "./components/root.js";
-import configureStore from "./configurestore.js";
+import Root from "./components/root";
+import configureStore from "./configurestore";
 
 const store = configureStore();
 
 render(
-    <Root store={store}/>,
-  window.document.getElementById('root'));
+  <Root store={store} />,
+  window.document.getElementById('root')
+);

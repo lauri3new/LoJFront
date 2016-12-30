@@ -1,46 +1,48 @@
 export const getData = (path = "random/") => {
-  let baseUrl = "http://localhost:3001/";
+  const baseUrl = "http://localhost:3001/";
   return (dispatch) => {
     dispatch(getRequest());
     return fetch(baseUrl + path)
   .then(
-    response => {
+    (response) => {
       if (response.status !== 200) {
-        throw new Error(response.status + " " + response.statusText)
+        throw new Error(response.status + " " + response.statusText);
       }
-      return response.json()
+      return response.json();
     })
-  .then( json => {
+  .then((json) => {
     dispatch(getRequestSuccess(json));
   })
-  .catch(function(err) {
+  .catch((err) => {
     dispatch(getRequestFailure(err));
-  })
-  }
-}
+  });
+  };
+};
 
 // fetch request
 const getRequest = () => ({
   type: `GET_REQUEST`
-})
+});
+
 // fetch sucess
-const getRequestSuccess = (data) => ({
+const getRequestSuccess = data => ({
   type: "GET_PRODUCTS_SUCCESS",
-  payload : data
-})
+  payload: data
+});
+
 // fetch failure
-const getRequestFailure = (err) => ({
+const getRequestFailure = err => ({
   type: `GET_REQUEST_FAILURE`,
   payload: err.message || "Something went wrong"
-})
+});
 
 export const selectWinner = (ID) => {
   return (dispatch) => {
-    dispatch(chosenShirt(ID))
-  }
-}
+    dispatch(chosenShirt(ID));
+  };
+};
 
-const chosenShirt = (ID) => ({
-  type : `SHIRT_CHOSEN`,
-  payload : `okokok ${ID}`
-})
+const chosenShirt = ID => ({
+  type: `SHIRT_CHOSEN`,
+  payload: `okokok ${ID}`
+});

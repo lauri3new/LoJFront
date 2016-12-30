@@ -1,20 +1,20 @@
 import React from "react";
-import { Link } from "react-router";
-import { connect } from "react-redux";
-import styles from "./app.css";
-import Gallery from "./gallery.js";
-import Header from "../components/header.js";
+import Header from "../components/header";
+import Navbar from "../components/navbar";
 
 // App container acts as presentation frame for app.
-
 const App = (props) => {
-    return(
-      <div>
-          <Header/> 
-          <Gallery/>
-      </div>
-        //<Footer/>
-    )
-}
+  return (
+    <div>
+      <Header />
+      <Navbar />
+      {props.children}
+    </div>
+  );
+};
+
+App.propTypes = {
+  children: React.PropTypes.node
+};
 
 export default App;

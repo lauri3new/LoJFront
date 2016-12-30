@@ -2,10 +2,12 @@
 const chosenReducer = (state = {}, action) => {
   switch (action.type) {
     case "SHIRT_CHOSEN":
-    state = {chosen: action.payload}
-      break;
+      return {
+        ...state,
+        chosen: action.payload
+      };
   }
-  return state
-}
+  return state;
+};
 
-export default chosenReducer
+export default chosenReducer;

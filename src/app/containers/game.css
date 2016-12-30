@@ -1,4 +1,4 @@
-.gallery {
+.game {
   display: block;
   margin-top:100px;
   max-width: 800px;
@@ -16,7 +16,6 @@
 
 .enterActive {
   animation: fade-in 1500ms forwards;
-
 }
 
 @keyframes fade-in {
