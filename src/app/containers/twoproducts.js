@@ -7,9 +7,9 @@ const TwoProducts = props => (
     {props.products.map((product, i) => {
       return (
         <Product
-          onClick={props.onClick}
-          key={i.toString()}
-          style={(props.keyo === 0) ? props.style.style : props.style.styleB}
+          onClickProp={props.onClickProp}
+          key={i}
+          style={(props.order === 0) ? props.style.fadeIn : props.style.opacityZero}
           boxStyle={Styles.box}
           image={product.ImageLink}
           URL={product.buyLink}

@@ -9,12 +9,16 @@ class Product extends React.Component {
     };
   }
 
+  componentWillUnmount() {
+    clearInterval(this.state.noClick);
+  }
+
   handleClick() {
     this.setState({
       clicked: true,
       style: `${Styles.noClicks}`
     });
-    setTimeout(() => {
+    this.state.noClick = setTimeout(() => {
       this.setState({
         clicked: false
       }); }, 1000);
@@ -29,7 +33,7 @@ class Product extends React.Component {
               className={`btn btn-default ${Styles.fifty} ${this.state.style}`}
               onClick={() => {
                 this.handleClick();
-                this.props.onClick(this.props.ID);
+                this.props.onClickProp(this.props.ID);
               }}
             >
               Winner
@@ -51,7 +55,7 @@ class Product extends React.Component {
 Product.propTypes = {
   boxStyle: React.PropTypes.string,
   style: React.PropTypes.string,
-  onClick: React.PropTypes.func,
+  onClickProp: React.PropTypes.func,
   ID: React.PropTypes.number,
   image: React.PropTypes.string
 };

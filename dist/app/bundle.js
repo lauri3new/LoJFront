@@ -55,11 +55,11 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 32);
 	
-	var _root = __webpack_require__(/*! ./components/root.js */ 178);
+	var _root = __webpack_require__(/*! ./components/root */ 178);
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _configurestore = __webpack_require__(/*! ./configurestore.js */ 293);
+	var _configurestore = __webpack_require__(/*! ./configurestore */ 293);
 	
 	var _configurestore2 = _interopRequireDefault(_configurestore);
 	
@@ -28882,10 +28882,6 @@
 	
 	var _header2 = _interopRequireDefault(_header);
 	
-	var _navbar = __webpack_require__(/*! ../components/navbar */ 268);
-	
-	var _navbar2 = _interopRequireDefault(_navbar);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// App container acts as presentation frame for app.
@@ -28894,7 +28890,6 @@
 	    "div",
 	    null,
 	    _react2.default.createElement(_header2.default, null),
-	    _react2.default.createElement(_navbar2.default, null),
 	    props.children
 	  );
 	};
@@ -28926,6 +28921,10 @@
 	
 	var _header2 = _interopRequireDefault(_header);
 	
+	var _navbar = __webpack_require__(/*! ./navbar */ 268);
+	
+	var _navbar2 = _interopRequireDefault(_navbar);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Header = function Header() {
@@ -28936,7 +28935,8 @@
 	      "div",
 	      { className: _header2.default.title },
 	      "LEAGUE OF JERSEYS"
-	    )
+	    ),
+	    _react2.default.createElement(_navbar2.default, null)
 	  );
 	};
 	
@@ -28983,7 +28983,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".header__container___27kzd {\n  position: fixed;\n  width: 100%;\n  height: 80px;\n  top:0px;\n  background-color: green;\n  opacity: 0.8!important;\n  z-index: 2;\n  padding-bottom: 50px;\n}\n\n.header__title___3GzDm {\n  color: white;\n  font-size: 40px;\n  font-weight: bold;\n  font-family: monospace;;\n  margin-top:20px;\n  margin-left: 30%;\n}\n", ""]);
+	exports.push([module.id, ".header__container___27kzd {\n  position: fixed;\n  width: 100%;\n  min-height: 80px;\n  top:0px;\n  background-color: green;\n  opacity: 0.8!important;\n  z-index: 2;\n  padding-bottom: 10px;\n  -webkit-box-shadow: 0 4px 2px -2px gray;\n  -moz-box-shadow: 0 4px 2px -2px gray;\n  box-shadow: 0 4px 2px -2px gray;\n}\n\n.header__title___3GzDm {\n  color: white;\n  font-size: 40px;\n  font-weight: bold;\n  margin-top:20px;\n  margin-left: 30%;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
@@ -29329,20 +29329,20 @@
 	var Navbar = function Navbar() {
 	  return _react2.default.createElement(
 	    'div',
-	    { style: { display: 'relative', marginTop: '100px', marginLeft: '5%' } },
+	    { style: { display: 'relative', marginLeft: '5%' } },
 	    _react2.default.createElement(
 	      _reactRouter.Link,
-	      { className: 'btn btn-primary', to: '/' },
+	      { className: 'btn btn-default', to: '/' },
 	      ' home'
 	    ),
 	    _react2.default.createElement(
 	      _reactRouter.Link,
-	      { className: 'btn btn-primary', to: '/game' },
+	      { className: 'btn btn-default', to: '/game' },
 	      ' play game'
 	    ),
 	    _react2.default.createElement(
 	      _reactRouter.Link,
-	      { className: 'btn btn-primary', to: '/shop' },
+	      { className: 'btn btn-default', to: '/shop' },
 	      ' shop'
 	    )
 	  );
@@ -29393,6 +29393,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// Game container - game involves choosing preferred product, next product is loaded behind
+	// for smooth transition, fades in from opacity 0.
 	var Game = function (_React$Component) {
 	  _inherits(Game, _React$Component);
 	
@@ -29402,8 +29404,8 @@
 	    var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, props));
 	
 	    _this.state = {
-	      style: _game2.default.enterActive,
-	      styleB: _game2.default.opacityZero
+	      fadeIn: _game2.default.enterInit,
+	      opacityZero: _game2.default.opacityZero
 	    };
 	    return _this;
 	  }
@@ -29411,13 +29413,16 @@
 	  _createClass(Game, [{
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.props.getInit();
+	      if (this.props.products.length === 0) {
+	        this.props.getInit();
+	      }
 	    }
 	  }, {
-	    key: "handleClick",
-	    value: function handleClick() {
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps() {
 	      this.setState({
-	        style: _game2.default.enterActive
+	        fadeIn: _game2.default.enterActive,
+	        opacityZero: _game2.default.opacityZero
 	      });
 	    }
 	  }, {
@@ -29425,30 +29430,33 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      return _react2.default.createElement(
-	        "div",
-	        { className: _game2.default.game },
+	      return (
+	        // react css transition group animates twoProducts fade out when they leave DOM
 	        _react2.default.createElement(
-	          _reactAddonsCssTransitionGroup2.default,
-	          {
-	            transitionName: _game2.default,
-	            transitionEnter: false,
-	            transitionLeaveTimeout: 1000
-	          },
-	          this.props.products.map(function (twoProducts, i) {
-	            return _react2.default.createElement(_twoproducts2.default, {
-	              classNom: _game2.default.game,
-	              key: twoProducts[0] && twoProducts[0].ID ? twoProducts[0].ID : i,
-	              keyo: i,
-	              products: twoProducts,
-	              stylee: _game2.default,
-	              style: _this2.state,
-	              onClick: function onClick(id) {
-	                _this2.props.selectWinner(id);
-	                _this2.props.getProducts();
-	              }
-	            });
-	          })
+	          "div",
+	          { className: _game2.default.game },
+	          _react2.default.createElement(
+	            _reactAddonsCssTransitionGroup2.default,
+	            {
+	              transitionName: _game2.default,
+	              transitionEnter: false,
+	              transitionLeaveTimeout: 1000
+	            },
+	            this.props.products.map(function (twoProducts, i) {
+	              // key is product ID or i as index when no products loaded.. index is not recommended to use as key
+	              return _react2.default.createElement(_twoproducts2.default, {
+	                key: twoProducts[0] && twoProducts[0].ID ? twoProducts[0].ID : i,
+	                order: i,
+	                products: twoProducts,
+	                styleProp: _game2.default,
+	                style: _this2.state,
+	                onClickProp: function onClickProp(id) {
+	                  _this2.props.selectWinner(id);
+	                  _this2.props.getProducts();
+	                }
+	              });
+	            })
+	          )
 	        )
 	      );
 	    }
@@ -29464,9 +29472,6 @@
 	  products: _react2.default.PropTypes.array
 	};
 	
-	// mapStateToProps tells React which properties of global state do we want to
-	// use in this component (users, error obj) and to which local properties we want to map them,
-	// so that they are accessible in from this.props
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    products: state.products
@@ -31695,9 +31700,9 @@
 	    { className: _twoproducts2.default.twoProducts },
 	    props.products.map(function (product, i) {
 	      return _react2.default.createElement(_product2.default, {
-	        onClick: props.onClick,
-	        key: i.toString(),
-	        style: props.keyo === 0 ? props.style.style : props.style.styleB,
+	        onClickProp: props.onClickProp,
+	        key: i,
+	        style: props.order === 0 ? props.style.fadeIn : props.style.opacityZero,
 	        boxStyle: _twoproducts2.default.box,
 	        image: product.ImageLink,
 	        URL: product.buyLink,
@@ -31761,6 +31766,11 @@
 	  }
 	
 	  _createClass(Product, [{
+	    key: "componentWillUnmount",
+	    value: function componentWillUnmount() {
+	      clearInterval(this.state.noClick);
+	    }
+	  }, {
 	    key: "handleClick",
 	    value: function handleClick() {
 	      var _this2 = this;
@@ -31769,7 +31779,7 @@
 	        clicked: true,
 	        style: "" + _product2.default.noClicks
 	      });
-	      setTimeout(function () {
+	      this.state.noClick = setTimeout(function () {
 	        _this2.setState({
 	          clicked: false
 	        });
@@ -31795,7 +31805,7 @@
 	                className: "btn btn-default " + _product2.default.fifty + " " + this.state.style,
 	                onClick: function onClick() {
 	                  _this3.handleClick();
-	                  _this3.props.onClick(_this3.props.ID);
+	                  _this3.props.onClickProp(_this3.props.ID);
 	                }
 	              },
 	              "Winner"
@@ -31825,7 +31835,7 @@
 	Product.propTypes = {
 	  boxStyle: _react2.default.PropTypes.string,
 	  style: _react2.default.PropTypes.string,
-	  onClick: _react2.default.PropTypes.func,
+	  onClickProp: _react2.default.PropTypes.func,
 	  ID: _react2.default.PropTypes.number,
 	  image: _react2.default.PropTypes.string
 	};
@@ -31976,13 +31986,15 @@
 	
 	
 	// module
-	exports.push([module.id, ".game__game___31EZR {\n  display: block;\n  margin-top:100px;\n  max-width: 800px;\n  min-width: 500px;\n  height: 50vw;\n  min-height: 300px;\n  max-height: 550px;\n  width:90%;\n  margin-left: 5%;\n}\n\n.game__opacityZero___VQVit {\n  opacity: 0\n}\n\n.game__enterActive___dqkiD {\n  animation: game__fade-in___3FblQ 1500ms forwards;\n}\n\n@keyframes game__fade-in___3FblQ {\n  0% {\n  opacity: 0;\n  }\n  67% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n.game__leave___1XXXf {\nopacity: 1;\n}\n\n.game__leave___1XXXf.game__leaveActive___2kEXr {\n  animation: game__fade-out___Wzlow 1000ms forwards;\n}\n\n@keyframes game__fade-out___Wzlow {\n  0% {\n  opacity: 1;\n  }\n  50% {\n  opacity: 1;\n  }\n  100% {\n  opacity: 0;\n  }\n}\n", ""]);
+	exports.push([module.id, ".game__game___31EZR {\n  display: block;\n  margin-top:100px;\n  max-width: 800px;\n  min-width: 500px;\n  height: 50vw;\n  min-height: 300px;\n  max-height: 550px;\n  width:90%;\n  margin-left: 5%;\n  padding-bottom: 20px;\n  overflow: hidden;\n}\n\n.game__opacityZero___VQVit {\n  opacity: 0\n}\n\n.game__enterActive___dqkiD {\n  animation: game__fade-in-extended___2J473 1500ms forwards;\n}\n\n.game__enterInit___2rS3D {\n  animation: game__fade-in___3FblQ 500ms forwards;\n}\n\n@keyframes game__fade-in___3FblQ {\n  0% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n@keyframes game__fade-in-extended___2J473 {\n  0% {\n  opacity: 0;\n  }\n  67% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n.game__leave___1XXXf {\nopacity: 1;\n}\n\n.game__leave___1XXXf.game__leaveActive___2kEXr {\n  animation: game__fade-out___Wzlow 1000ms forwards;\n}\n\n@keyframes game__fade-out___Wzlow {\n  0% {\n  opacity: 1;\n  }\n  50% {\n  opacity: 1;\n  }\n  100% {\n  opacity: 0;\n  }\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
 		"game": "game__game___31EZR",
 		"opacityZero": "game__opacityZero___VQVit",
 		"enterActive": "game__enterActive___dqkiD",
+		"fade-in-extended": "game__fade-in-extended___2J473",
+		"enterInit": "game__enterInit___2rS3D",
 		"fade-in": "game__fade-in___3FblQ",
 		"leave": "game__leave___1XXXf",
 		"leaveActive": "game__leaveActive___2kEXr",
@@ -32131,8 +32143,7 @@
 	}(_react2.default.Component);
 	
 	Gallery.propTypes = {
-	  products: _react2.default.PropTypes.object,
-	  getInit: _react2.default.PropTypes.func
+	  products: _react2.default.PropTypes.object
 	};
 	
 	// mapStateToProps tells React which properties of global state do we want to
@@ -32180,11 +32191,11 @@
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _index = __webpack_require__(/*! ./reducers/index.js */ 301);
+	var _index = __webpack_require__(/*! ./reducers/index */ 301);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _localStorage = __webpack_require__(/*! ./localStorage.js */ 305);
+	var _localStorage = __webpack_require__(/*! ./localStorage */ 305);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32200,7 +32211,6 @@
 	      users: store.getState().users
 	    });
 	  });
-	
 	  return store;
 	};
 	
@@ -33171,7 +33181,6 @@
 	  switch (action.type) {
 	    case "GET_PRODUCTS_SUCCESS":
 	      return state.slice(1, 2).concat(action.payload);
-	      break;
 	  }
 	  return state;
 	};
@@ -33199,10 +33208,9 @@
 	
 	  switch (action.type) {
 	    case "SHIRT_CHOSEN":
-	      state = _extends({}, state, {
+	      return _extends({}, state, {
 	        chosen: action.payload
 	      });
-	      break;
 	  }
 	  return state;
 	};

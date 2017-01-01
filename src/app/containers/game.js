@@ -5,28 +5,33 @@ import TwoProducts from "./twoproducts";
 import Styles from "./game.css";
 import { getData, selectWinner } from "../actions/actions";
 
-
+// Game container - game involves choosing preferred product, next product is loaded behind
+// for smooth transition, fades in from opacity 0.
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      style: Styles.enterActive,
-      styleB: Styles.opacityZero
+      fadeIn: Styles.enterInit,
+      opacityZero: Styles.opacityZero
     };
   }
 
   componentDidMount() {
-    this.props.getInit();
+    if (this.props.products.length === 0) {
+      this.props.getInit();
+    }
   }
 
-  handleClick() {
+  componentWillReceiveProps() {
     this.setState({
-      style: Styles.enterActive
+      fadeIn: Styles.enterActive,
+      opacityZero: Styles.opacityZero
     });
   }
 
   render() {
     return (
+// react css transition group animates twoProducts fade out when they leave DOM
       <div className={Styles.game}>
         <ReactCSSTransitionGroup
           transitionName={Styles}
@@ -34,15 +39,15 @@ class Game extends React.Component {
           transitionLeaveTimeout={1000}
         >
           { this.props.products.map((twoProducts, i) => {
+// key is product ID or i as index when no products loaded.. index is not recommended to use as key
             return (
               <TwoProducts
-                classNom={Styles.game}
                 key={twoProducts[0] && twoProducts[0].ID ? twoProducts[0].ID : i}
-                keyo={i}
+                order={i}
                 products={twoProducts}
-                stylee={Styles}
+                styleProp={Styles}
                 style={this.state}
-                onClick={(id) => {
+                onClickProp={(id) => {
                   this.props.selectWinner(id);
                   this.props.getProducts();
                 }}
@@ -61,9 +66,6 @@ Game.propTypes = {
   products: React.PropTypes.array
 };
 
-// mapStateToProps tells React which properties of global state do we want to
-// use in this component (users, error obj) and to which local properties we want to map them,
-// so that they are accessible in from this.props
 const mapStateToProps = state => ({
   products: state.products
 });

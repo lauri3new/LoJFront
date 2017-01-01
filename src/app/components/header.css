@@ -1,19 +1,21 @@
 .container {
   position: fixed;
   width: 100%;
-  height: 80px;
+  min-height: 80px;
   top:0px;
   background-color: green;
   opacity: 0.8!important;
   z-index: 2;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
+  -webkit-box-shadow: 0 4px 2px -2px gray;
+  -moz-box-shadow: 0 4px 2px -2px gray;
+  box-shadow: 0 4px 2px -2px gray;
 }
 
 .title {
   color: white;
   font-size: 40px;
   font-weight: bold;
-  font-family: monospace;;
   margin-top:20px;
   margin-left: 30%;
 }

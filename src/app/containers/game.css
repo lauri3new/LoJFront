@@ -8,6 +8,8 @@
   max-height: 550px;
   width:90%;
   margin-left: 5%;
+  padding-bottom: 20px;
+  overflow: hidden;
 }
 
 .opacityZero {
@@ -15,10 +17,23 @@
 }
 
 .enterActive {
-  animation: fade-in 1500ms forwards;
+  animation: fade-in-extended 1500ms forwards;
+}
+
+.enterInit {
+  animation: fade-in 500ms forwards;
 }
 
 @keyframes fade-in {
+  0% {
+  opacity: 0;
+  }
+  100% {
+  opacity: 1;
+  }
+}
+
+@keyframes fade-in-extended {
   0% {
   opacity: 0;
   }
