@@ -13,7 +13,7 @@ class Gallery extends React.Component {
         <div>
           { this.props.products.map((product, i) => {
             return (
-              <div>
+              <div key={i}>
                 {`${i} and ${product.Title}`}
               </div>
             );
@@ -28,7 +28,7 @@ class Gallery extends React.Component {
 }
 
 Gallery.propTypes = {
-  products: React.PropTypes.object,
+  products: React.PropTypes.array,
   // getInit: React.PropTypes.func
 };
 
