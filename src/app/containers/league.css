@@ -10,11 +10,31 @@
   animation: fade-in 500ms forwards;
 }
 
+.increase {
+  color: green;
+  animation: fade-out 1500ms forwards;
+}
+
+.decrease {
+  color: red;
+  animation: fade-out 1500ms forwards;
+}
+
+
 @keyframes fade-in {
   0% {
   opacity: 0;
   }
   100% {
   opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+  opacity: 1;
+  }
+  100% {
+  opacity: 0;
   }
 }

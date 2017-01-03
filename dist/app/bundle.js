@@ -59,7 +59,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _configurestore = __webpack_require__(/*! ./configurestore */ 294);
+	var _configurestore = __webpack_require__(/*! ./configurestore */ 296);
 	
 	var _configurestore2 = _interopRequireDefault(_configurestore);
 	
@@ -32202,6 +32202,10 @@
 	
 	var _actions = __webpack_require__(/*! ../actions/actions */ 291);
 	
+	var _league = __webpack_require__(/*! ./league.css */ 294);
+	
+	var _league2 = _interopRequireDefault(_league);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32213,30 +32217,105 @@
 	var League = function (_React$Component) {
 	  _inherits(League, _React$Component);
 	
-	  function League() {
+	  function League(props) {
 	    _classCallCheck(this, League);
 	
-	    return _possibleConstructorReturn(this, (League.__proto__ || Object.getPrototypeOf(League)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (League.__proto__ || Object.getPrototypeOf(League)).call(this, props));
+	
+	    _this.state = {};
+	    return _this;
 	  }
 	
 	  _createClass(League, [{
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.props.getData("league", "LEAGUE");
+	      var _this2 = this;
+	
+	      this.props.getTable();
+	      var autoUpdate = setInterval(function () {
+	        _this2.props.getTable();
+	      }, 5000);
+	      this.setState({
+	        autoUpdate: autoUpdate
+	      });
+	    }
+	  }, {
+	    key: "componentWillUnmount",
+	    value: function componentWillUnmount() {
+	      clearInterval(this.state.autoUpdate);
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
+	      var _this3 = this;
+	
+	      var wentUp = _react2.default.createElement("span", { className: "glyphicon glyphicon-triangle-top " + _league2.default.increase });
+	      var wentDown = _react2.default.createElement("span", { className: "glyphicon glyphicon-triangle-bottom " + _league2.default.decrease });
 	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        this.props.league.map(function (shirt, i) {
-	          return _react2.default.createElement(
-	            "div",
-	            { key: i },
-	            i + " and " + shirt.Title
-	          );
-	        })
+	        "table",
+	        {
+	          className: "table table-striped table-bordered table-hover " + _league2.default.table + ' ' + _league2.default.enterInit
+	        },
+	        _react2.default.createElement(
+	          "tbody",
+	          null,
+	          _react2.default.createElement(
+	            "tr",
+	            null,
+	            _react2.default.createElement(
+	              "th",
+	              null,
+	              "Position"
+	            ),
+	            _react2.default.createElement(
+	              "th",
+	              null,
+	              "Points"
+	            ),
+	            _react2.default.createElement(
+	              "th",
+	              null,
+	              "Shirt"
+	            ),
+	            _react2.default.createElement(
+	              "th",
+	              null,
+	              "More info bro"
+	            )
+	          ),
+	          this.props.Present.map(function (shirt, i) {
+	            return _react2.default.createElement(
+	              "tr",
+	              { key: i },
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                i + 1 + ' ',
+	                i < _this3.props.PastOrder.indexOf(shirt.ID) || _this3.props.PastOrder.indexOf(shirt.ID) === -1 ? wentUp : null,
+	                i > _this3.props.PastOrder.indexOf(shirt.ID) && _this3.props.PastOrder.indexOf(shirt.ID) !== -1 ? wentDown : null
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "" + shirt.Points
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "" + shirt.Title
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: "" + shirt.OurAffLink },
+	                  "" + shirt.Price
+	                )
+	              )
+	            );
+	          })
+	        )
 	      );
 	    }
 	  }]);
@@ -32245,8 +32324,9 @@
 	}(_react2.default.Component);
 	
 	League.propTypes = {
-	  league: _react2.default.PropTypes.array,
-	  getData: _react2.default.PropTypes.func
+	  Present: _react2.default.PropTypes.array,
+	  PastOrder: _react2.default.PropTypes.array,
+	  getTable: _react2.default.PropTypes.func
 	};
 	
 	// mapStateToProps tells React which properties of global state do we want to
@@ -32254,14 +32334,16 @@
 	// so that they are accessible in from this.props
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    league: state.league
+	    Present: state.league.Present,
+	    Past: state.league.Past,
+	    PastOrder: state.league.PastOrder
 	  };
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    getData: function getData(path, type) {
-	      dispatch((0, _actions.getData)(path, type));
+	    getTable: function getTable() {
+	      dispatch((0, _actions.getData)("league", "LEAGUE"));
 	    }
 	  };
 	};
@@ -32270,6 +32352,59 @@
 
 /***/ },
 /* 294 */
+/*!***************************************!*\
+  !*** ./src/app/containers/league.css ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../../~/css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./league.css */ 295);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../../~/style-loader/addStyles.js */ 267)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./league.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./league.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 295 */
+/*!*******************************************************************************************************************************!*\
+  !*** ./~/css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./src/app/containers/league.css ***!
+  \*******************************************************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 266)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".league__table___3T-VZ {\n  margin-top: 150px;\n  margin-left: 20px;\n  margin-right: 20px;\n  max-width: 800px;\n  min-width: 500px;\n}\n\n.league__enterInit___HklRz {\n  animation: league__fade-in___JpoEc 500ms forwards;\n}\n\n.league__increase___1XYhO {\n  color: green;\n  animation: league__fade-out___1ETie 1500ms forwards;\n}\n\n.league__decrease___2T4dY {\n  color: red;\n  animation: league__fade-out___1ETie 1500ms forwards;\n}\n\n\n@keyframes league__fade-in___JpoEc {\n  0% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n@keyframes league__fade-out___1ETie {\n  0% {\n  opacity: 1;\n  }\n  100% {\n  opacity: 0;\n  }\n}\n", ""]);
+	
+	// exports
+	exports.locals = {
+		"table": "league__table___3T-VZ",
+		"enterInit": "league__enterInit___HklRz",
+		"fade-in": "league__fade-in___JpoEc",
+		"increase": "league__increase___1XYhO",
+		"fade-out": "league__fade-out___1ETie",
+		"decrease": "league__decrease___2T4dY"
+	};
+
+/***/ },
+/* 296 */
 /*!***********************************!*\
   !*** ./src/app/configurestore.js ***!
   \***********************************/
@@ -32283,19 +32418,19 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 241);
 	
-	var _reduxLogger = __webpack_require__(/*! redux-logger */ 295);
+	var _reduxLogger = __webpack_require__(/*! redux-logger */ 297);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 301);
+	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 303);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _index = __webpack_require__(/*! ./reducers/index */ 302);
+	var _index = __webpack_require__(/*! ./reducers/index */ 304);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _localStorage = __webpack_require__(/*! ./localStorage */ 307);
+	var _localStorage = __webpack_require__(/*! ./localStorage */ 309);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32317,7 +32452,7 @@
 	exports.default = configureStore;
 
 /***/ },
-/* 295 */
+/* 297 */
 /*!*************************************!*\
   !*** ./~/redux-logger/lib/index.js ***!
   \*************************************/
@@ -32331,11 +32466,11 @@
 	  value: true
 	});
 	
-	var _core = __webpack_require__(/*! ./core */ 296);
+	var _core = __webpack_require__(/*! ./core */ 298);
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 297);
+	var _helpers = __webpack_require__(/*! ./helpers */ 299);
 	
-	var _defaults = __webpack_require__(/*! ./defaults */ 300);
+	var _defaults = __webpack_require__(/*! ./defaults */ 302);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -32438,7 +32573,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 296 */
+/* 298 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/core.js ***!
   \************************************/
@@ -32451,9 +32586,9 @@
 	});
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 297);
+	var _helpers = __webpack_require__(/*! ./helpers */ 299);
 	
-	var _diff = __webpack_require__(/*! ./diff */ 298);
+	var _diff = __webpack_require__(/*! ./diff */ 300);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -32582,7 +32717,7 @@
 	}
 
 /***/ },
-/* 297 */
+/* 299 */
 /*!***************************************!*\
   !*** ./~/redux-logger/lib/helpers.js ***!
   \***************************************/
@@ -32609,7 +32744,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 298 */
+/* 300 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/diff.js ***!
   \************************************/
@@ -32622,7 +32757,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(/*! deep-diff */ 299);
+	var _deepDiff = __webpack_require__(/*! deep-diff */ 301);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -32708,7 +32843,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 299 */
+/* 301 */
 /*!******************************!*\
   !*** ./~/deep-diff/index.js ***!
   \******************************/
@@ -33140,7 +33275,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 300 */
+/* 302 */
 /*!****************************************!*\
   !*** ./~/redux-logger/lib/defaults.js ***!
   \****************************************/
@@ -33194,7 +33329,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 301 */
+/* 303 */
 /*!************************************!*\
   !*** ./~/redux-thunk/lib/index.js ***!
   \************************************/
@@ -33225,7 +33360,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 302 */
+/* 304 */
 /*!***********************************!*\
   !*** ./src/app/reducers/index.js ***!
   \***********************************/
@@ -33239,19 +33374,19 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 241);
 	
-	var _products = __webpack_require__(/*! ./products */ 303);
+	var _products = __webpack_require__(/*! ./products */ 305);
 	
 	var _products2 = _interopRequireDefault(_products);
 	
-	var _chosenshirt = __webpack_require__(/*! ./chosenshirt */ 304);
+	var _chosenshirt = __webpack_require__(/*! ./chosenshirt */ 306);
 	
 	var _chosenshirt2 = _interopRequireDefault(_chosenshirt);
 	
-	var _gallery = __webpack_require__(/*! ./gallery */ 305);
+	var _gallery = __webpack_require__(/*! ./gallery */ 307);
 	
 	var _gallery2 = _interopRequireDefault(_gallery);
 	
-	var _league = __webpack_require__(/*! ./league */ 306);
+	var _league = __webpack_require__(/*! ./league */ 308);
 	
 	var _league2 = _interopRequireDefault(_league);
 	
@@ -33265,7 +33400,7 @@
 	}); // root reducer
 
 /***/ },
-/* 303 */
+/* 305 */
 /*!**************************************!*\
   !*** ./src/app/reducers/products.js ***!
   \**************************************/
@@ -33291,7 +33426,7 @@
 	exports.default = productsReducer;
 
 /***/ },
-/* 304 */
+/* 306 */
 /*!*****************************************!*\
   !*** ./src/app/reducers/chosenshirt.js ***!
   \*****************************************/
@@ -33321,7 +33456,7 @@
 	exports.default = chosenReducer;
 
 /***/ },
-/* 305 */
+/* 307 */
 /*!*************************************!*\
   !*** ./src/app/reducers/gallery.js ***!
   \*************************************/
@@ -33347,7 +33482,7 @@
 	exports.default = galleryReducer;
 
 /***/ },
-/* 306 */
+/* 308 */
 /*!************************************!*\
   !*** ./src/app/reducers/league.js ***!
   \************************************/
@@ -33359,13 +33494,31 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var initialState = {
+	  Past: [],
+	  Present: []
+	};
+	
 	var leagueReducer = function leagueReducer() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	  var action = arguments[1];
 	
 	  switch (action.type) {
 	    case "GET_LEAGUE_SUCCESS":
-	      return action.payload;
+	      return _extends({}, state, {
+	        Past: state.Present.length === 0 ? action.payload : state.Present,
+	        Present: action.payload,
+	        PastOrder: state.Present.length === 0 ? action.payload.map(function (product) {
+	          return product.ID;
+	        }) : state.Past.map(function (product) {
+	          return product.ID;
+	        }),
+	        PresentOrder: action.payload.map(function (product) {
+	          return product.ID;
+	        })
+	      });
 	  }
 	  return state;
 	};
@@ -33373,7 +33526,7 @@
 	exports.default = leagueReducer;
 
 /***/ },
-/* 307 */
+/* 309 */
 /*!*********************************!*\
   !*** ./src/app/localStorage.js ***!
   \*********************************/
