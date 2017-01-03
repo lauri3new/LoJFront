@@ -1,4 +1,4 @@
-export const getData = (path = "random/") => {
+export const getData = (path = "random/", type = "PRODUCTS") => {
   const baseUrl = "http://localhost:3001/";
   return (dispatch) => {
     dispatch(getRequest());
@@ -11,7 +11,7 @@ export const getData = (path = "random/") => {
       return response.json();
     })
   .then((json) => {
-    dispatch(getRequestSuccess(json));
+    dispatch(getRequestSuccess(json, type));
   })
   .catch((err) => {
     dispatch(getRequestFailure(err));
@@ -25,8 +25,8 @@ const getRequest = () => ({
 });
 
 // fetch sucess
-const getRequestSuccess = data => ({
-  type: "GET_PRODUCTS_SUCCESS",
+const getRequestSuccess = (data, type) => ({
+  type: `GET_${type}_SUCCESS`,
   payload: data
 });
 

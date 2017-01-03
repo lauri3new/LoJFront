@@ -59,7 +59,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _configurestore = __webpack_require__(/*! ./configurestore */ 293);
+	var _configurestore = __webpack_require__(/*! ./configurestore */ 294);
 	
 	var _configurestore2 = _interopRequireDefault(_configurestore);
 	
@@ -22044,6 +22044,10 @@
 	
 	var _gallery2 = _interopRequireDefault(_gallery);
 	
+	var _league = __webpack_require__(/*! ../containers/league */ 293);
+	
+	var _league2 = _interopRequireDefault(_league);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// Root component uses Provider to provide the app with store.
@@ -22061,7 +22065,8 @@
 	        _reactRouter.Route,
 	        { path: "/", component: _app2.default },
 	        _react2.default.createElement(_reactRouter.Route, { path: "game", component: _game2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: "shop", component: _gallery2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: "shop", component: _gallery2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: "league-table", component: _league2.default })
 	      )
 	    )
 	  );
@@ -29344,6 +29349,11 @@
 	      _reactRouter.Link,
 	      { className: 'btn btn-default', to: '/shop' },
 	      ' shop'
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { className: 'btn btn-default', to: '/league-table' },
+	      ' league table'
 	    )
 	  );
 	};
@@ -32015,6 +32025,7 @@
 	});
 	var getData = exports.getData = function getData() {
 	  var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "random/";
+	  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "PRODUCTS";
 	
 	  var baseUrl = "http://localhost:3001/";
 	  return function (dispatch) {
@@ -32025,7 +32036,7 @@
 	      }
 	      return response.json();
 	    }).then(function (json) {
-	      dispatch(getRequestSuccess(json));
+	      dispatch(getRequestSuccess(json, type));
 	    }).catch(function (err) {
 	      dispatch(getRequestFailure(err));
 	    });
@@ -32040,9 +32051,9 @@
 	};
 	
 	// fetch sucess
-	var getRequestSuccess = function getRequestSuccess(data) {
+	var getRequestSuccess = function getRequestSuccess(data, type) {
 	  return {
-	    type: "GET_PRODUCTS_SUCCESS",
+	    type: "GET_" + type + "_SUCCESS",
 	    payload: data
 	  };
 	};
@@ -32125,7 +32136,7 @@
 	          this.props.products.map(function (product, i) {
 	            return _react2.default.createElement(
 	              "div",
-	              null,
+	              { key: i },
 	              i + " and " + product.Title
 	            );
 	          })
@@ -32143,7 +32154,7 @@
 	}(_react2.default.Component);
 	
 	Gallery.propTypes = {
-	  products: _react2.default.PropTypes.object
+	  products: _react2.default.PropTypes.array
 	};
 	
 	// mapStateToProps tells React which properties of global state do we want to
@@ -32170,6 +32181,95 @@
 
 /***/ },
 /* 293 */
+/*!**************************************!*\
+  !*** ./src/app/containers/league.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 234);
+	
+	var _actions = __webpack_require__(/*! ../actions/actions */ 291);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var League = function (_React$Component) {
+	  _inherits(League, _React$Component);
+	
+	  function League() {
+	    _classCallCheck(this, League);
+	
+	    return _possibleConstructorReturn(this, (League.__proto__ || Object.getPrototypeOf(League)).apply(this, arguments));
+	  }
+	
+	  _createClass(League, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.props.getData("league", "LEAGUE");
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        this.props.league.map(function (shirt, i) {
+	          return _react2.default.createElement(
+	            "div",
+	            { key: i },
+	            i + " and " + shirt.Title
+	          );
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return League;
+	}(_react2.default.Component);
+	
+	League.propTypes = {
+	  league: _react2.default.PropTypes.array,
+	  getData: _react2.default.PropTypes.func
+	};
+	
+	// mapStateToProps tells React which properties of global state do we want to
+	// use in this component (users, error obj) and to which local properties we want to map them,
+	// so that they are accessible in from this.props
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    league: state.league
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    getData: function getData(path, type) {
+	      dispatch((0, _actions.getData)(path, type));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(League);
+
+/***/ },
+/* 294 */
 /*!***********************************!*\
   !*** ./src/app/configurestore.js ***!
   \***********************************/
@@ -32183,19 +32283,19 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 241);
 	
-	var _reduxLogger = __webpack_require__(/*! redux-logger */ 294);
+	var _reduxLogger = __webpack_require__(/*! redux-logger */ 295);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 300);
+	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 301);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _index = __webpack_require__(/*! ./reducers/index */ 301);
+	var _index = __webpack_require__(/*! ./reducers/index */ 302);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _localStorage = __webpack_require__(/*! ./localStorage */ 305);
+	var _localStorage = __webpack_require__(/*! ./localStorage */ 307);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32208,7 +32308,7 @@
 	  var store = (0, _redux.createStore)(_index2.default, persistedState, (0, _redux.applyMiddleware)((0, _reduxLogger2.default)(), _reduxThunk2.default));
 	  store.subscribe(function () {
 	    (0, _localStorage.saveState)({
-	      users: store.getState().users
+	      products: store.getState().products
 	    });
 	  });
 	  return store;
@@ -32217,7 +32317,7 @@
 	exports.default = configureStore;
 
 /***/ },
-/* 294 */
+/* 295 */
 /*!*************************************!*\
   !*** ./~/redux-logger/lib/index.js ***!
   \*************************************/
@@ -32231,11 +32331,11 @@
 	  value: true
 	});
 	
-	var _core = __webpack_require__(/*! ./core */ 295);
+	var _core = __webpack_require__(/*! ./core */ 296);
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 296);
+	var _helpers = __webpack_require__(/*! ./helpers */ 297);
 	
-	var _defaults = __webpack_require__(/*! ./defaults */ 299);
+	var _defaults = __webpack_require__(/*! ./defaults */ 300);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -32338,7 +32438,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 295 */
+/* 296 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/core.js ***!
   \************************************/
@@ -32351,9 +32451,9 @@
 	});
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 296);
+	var _helpers = __webpack_require__(/*! ./helpers */ 297);
 	
-	var _diff = __webpack_require__(/*! ./diff */ 297);
+	var _diff = __webpack_require__(/*! ./diff */ 298);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -32482,7 +32582,7 @@
 	}
 
 /***/ },
-/* 296 */
+/* 297 */
 /*!***************************************!*\
   !*** ./~/redux-logger/lib/helpers.js ***!
   \***************************************/
@@ -32509,7 +32609,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 297 */
+/* 298 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/diff.js ***!
   \************************************/
@@ -32522,7 +32622,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(/*! deep-diff */ 298);
+	var _deepDiff = __webpack_require__(/*! deep-diff */ 299);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -32608,7 +32708,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 298 */
+/* 299 */
 /*!******************************!*\
   !*** ./~/deep-diff/index.js ***!
   \******************************/
@@ -33040,7 +33140,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 299 */
+/* 300 */
 /*!****************************************!*\
   !*** ./~/redux-logger/lib/defaults.js ***!
   \****************************************/
@@ -33094,7 +33194,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 300 */
+/* 301 */
 /*!************************************!*\
   !*** ./~/redux-thunk/lib/index.js ***!
   \************************************/
@@ -33125,7 +33225,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 301 */
+/* 302 */
 /*!***********************************!*\
   !*** ./src/app/reducers/index.js ***!
   \***********************************/
@@ -33139,30 +33239,33 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 241);
 	
-	var _products = __webpack_require__(/*! ./products */ 302);
+	var _products = __webpack_require__(/*! ./products */ 303);
 	
 	var _products2 = _interopRequireDefault(_products);
 	
-	var _chosenshirt = __webpack_require__(/*! ./chosenshirt */ 303);
+	var _chosenshirt = __webpack_require__(/*! ./chosenshirt */ 304);
 	
 	var _chosenshirt2 = _interopRequireDefault(_chosenshirt);
 	
-	var _gallery = __webpack_require__(/*! ./gallery */ 304);
+	var _gallery = __webpack_require__(/*! ./gallery */ 305);
 	
 	var _gallery2 = _interopRequireDefault(_gallery);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _league = __webpack_require__(/*! ./league */ 306);
 	
-	// root reducer
+	var _league2 = _interopRequireDefault(_league);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = (0, _redux.combineReducers)({
 	  products: _products2.default,
 	  chosen: _chosenshirt2.default,
-	  gallery: _gallery2.default
-	});
+	  gallery: _gallery2.default,
+	  league: _league2.default
+	}); // root reducer
 
 /***/ },
-/* 302 */
+/* 303 */
 /*!**************************************!*\
   !*** ./src/app/reducers/products.js ***!
   \**************************************/
@@ -33188,7 +33291,7 @@
 	exports.default = productsReducer;
 
 /***/ },
-/* 303 */
+/* 304 */
 /*!*****************************************!*\
   !*** ./src/app/reducers/chosenshirt.js ***!
   \*****************************************/
@@ -33218,7 +33321,7 @@
 	exports.default = chosenReducer;
 
 /***/ },
-/* 304 */
+/* 305 */
 /*!*************************************!*\
   !*** ./src/app/reducers/gallery.js ***!
   \*************************************/
@@ -33244,7 +33347,33 @@
 	exports.default = galleryReducer;
 
 /***/ },
-/* 305 */
+/* 306 */
+/*!************************************!*\
+  !*** ./src/app/reducers/league.js ***!
+  \************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var leagueReducer = function leagueReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case "GET_LEAGUE_SUCCESS":
+	      return action.payload;
+	  }
+	  return state;
+	};
+	
+	exports.default = leagueReducer;
+
+/***/ },
+/* 307 */
 /*!*********************************!*\
   !*** ./src/app/localStorage.js ***!
   \*********************************/

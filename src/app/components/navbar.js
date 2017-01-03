@@ -7,6 +7,7 @@ const Navbar = () => {
       <Link className={`btn btn-default`} to={`/`}> home</Link>
       <Link className={`btn btn-default`} to={`/game`}> play game</Link>
       <Link className={`btn btn-default`} to={`/shop`}> shop</Link>
+      <Link className={`btn btn-default`} to={`/league-table`}> league table</Link>
     </div>
   );
 };
