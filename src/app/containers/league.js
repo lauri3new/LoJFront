@@ -13,7 +13,7 @@ class League extends React.Component {
   componentDidMount() {
     this.props.getTable();
     const autoUpdate = setInterval(() => {
-      this.props.getTable(); }, 5000);
+      this.props.getTable(); }, 30000);
     this.setState({
       autoUpdate
     });

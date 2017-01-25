@@ -43,6 +43,12 @@
 -moz-transition: background-color 1000ms;
 -o-transition: background-color 1000ms;
 transition: background-color 1000ms;
+-webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari*/
+   -khtml-user-select: none; /* Konqueror */
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none;
 }
 
 .share:hover {
@@ -60,17 +66,12 @@ transition: background-color 1000ms;
   padding-left: 12px;
   position:absolute;
   margin-top: 80vh;
-  font-family: "stereofidelic";
   z-index: 10;
   cursor: pointer;
   -webkit-transition: background-color 1000ms;
 -moz-transition: background-color 1000ms;
 -o-transition: background-color 1000ms;
 transition: background-color 1000ms;
--webkit-transition: color 500ms;
--moz-transition: color 500ms;
--o-transition: color 500ms;
-transition: color 500ms;
 }
 
 .scroll:hover {
@@ -92,6 +93,12 @@ transition: color 500ms;
   margin-top: 40vh;
   font-family: "stereofidelic";
   z-index: 10;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari*/
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
 }
 
 .opacityZero {

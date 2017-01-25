@@ -61,6 +61,12 @@
 }
 
 .gallery {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari*/
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
     background-color: white;
     overflow: hidden;
     min-height: 600px;
@@ -115,12 +121,12 @@
 
 .increase {
   color: green;
-  animation: fade-out 1500ms forwards;
+  animation: fade-out 30000ms forwards;
 }
 
 .decrease {
   color: red;
-  animation: fade-out 1500ms forwards;
+  animation: fade-out 30000ms forwards;
 }
 
 
@@ -135,7 +141,13 @@
 
 @keyframes fade-out {
   0% {
-  opacity: 1;
+  opacity: 0;
+  }
+  1% {
+  opacity: 0.8;
+  }
+  70% {
+  opacity:0.5;
   }
   100% {
   opacity: 0;

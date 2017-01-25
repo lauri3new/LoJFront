@@ -16,7 +16,7 @@ class Product extends React.Component {
   handleClick() {
     this.setState({
       clicked: true,
-      style: `${Styles.noClicks}`
+      style: `${Styles.noPointer}`
     });
     this.state.noClick = setTimeout(() => {
       this.setState({
