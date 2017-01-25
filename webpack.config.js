@@ -15,6 +15,13 @@ var config = {
   module: {
     loaders: [
       {
+        test: /\.(png|jpg)$/,
+        loader: 'url?limit=100000'
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader" },
+      {
         test: /\.css$/,
         loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
       },

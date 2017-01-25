@@ -1,16 +1,3 @@
-.game {
-  display: block;
-  margin-top:100px;
-  max-width: 800px;
-  min-width: 500px;
-  height: 50vw;
-  min-height: 300px;
-  max-height: 550px;
-  width:90%;
-  margin-left: 5%;
-  padding-bottom: 20px;
-  overflow: hidden;
-}
 
 .opacityZero {
   opacity: 0
@@ -55,10 +42,10 @@ opacity: 1;
 
 @keyframes fade-out {
   0% {
-  opacity: 1;
+      opacity: 1;
   }
-  50% {
-  opacity: 1;
+  75% {
+      opacity: 1;
   }
   100% {
   opacity: 0;

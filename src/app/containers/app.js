@@ -1,12 +1,20 @@
 import React from "react";
-import Header from "../components/header";
+import Game from "./game";
+import League from "./league";
 
 // App container acts as presentation frame for app.
 const App = (props) => {
   return (
     <div>
-      <Header />
-      {props.children}
+    <div className="row">
+      <Game />
+    </div>
+    <div style={{ marginTop:'100vh', height: '20vh', backgroundColor: 'rgb(230,230,230)', textAlign: 'center' }}>
+      <h1 >LEAGUE OF JERSEYS</h1>
+    </div>
+    <div >
+      <League />
+    </div>
     </div>
   );
 };

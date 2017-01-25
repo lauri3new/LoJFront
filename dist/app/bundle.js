@@ -59,7 +59,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _configurestore = __webpack_require__(/*! ./configurestore */ 296);
+	var _configurestore = __webpack_require__(/*! ./configurestore */ 295);
 	
 	var _configurestore2 = _interopRequireDefault(_configurestore);
 	
@@ -22059,21 +22059,13 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 234);
 	
-	var _app = __webpack_require__(/*! ../containers/app */ 262);
+	var _home = __webpack_require__(/*! ./home */ 262);
+	
+	var _home2 = _interopRequireDefault(_home);
+	
+	var _app = __webpack_require__(/*! ../containers/app */ 268);
 	
 	var _app2 = _interopRequireDefault(_app);
-	
-	var _game = __webpack_require__(/*! ../containers/game */ 269);
-	
-	var _game2 = _interopRequireDefault(_game);
-	
-	var _gallery = __webpack_require__(/*! ../containers/gallery */ 292);
-	
-	var _gallery2 = _interopRequireDefault(_gallery);
-	
-	var _league = __webpack_require__(/*! ../containers/league */ 293);
-	
-	var _league2 = _interopRequireDefault(_league);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -22088,13 +22080,8 @@
 	    _react2.default.createElement(
 	      _reactRouter.Router,
 	      { history: _reactRouter.browserHistory },
-	      _react2.default.createElement(
-	        _reactRouter.Route,
-	        { path: "/", component: _app2.default },
-	        _react2.default.createElement(_reactRouter.Route, { path: "game", component: _game2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: "shop", component: _gallery2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: "league-table", component: _league2.default })
-	      )
+	      _react2.default.createElement(_reactRouter.Route, { path: "play", component: _app2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: "*", component: _home2.default })
 	    )
 	  );
 	};
@@ -29021,9 +29008,9 @@
 
 /***/ },
 /* 262 */
-/*!***********************************!*\
-  !*** ./src/app/containers/app.js ***!
-  \***********************************/
+/*!************************************!*\
+  !*** ./src/app/components/home.js ***!
+  \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29036,81 +29023,67 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _header = __webpack_require__(/*! ../components/header */ 263);
+	var _home = __webpack_require__(/*! ./home.css */ 263);
 	
-	var _header2 = _interopRequireDefault(_header);
+	var _home2 = _interopRequireDefault(_home);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 179);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// App container acts as presentation frame for app.
-	var App = function App(props) {
+	var Home = function Home(props) {
 	  return _react2.default.createElement(
 	    "div",
-	    null,
-	    _react2.default.createElement(_header2.default, null),
-	    props.children
+	    { className: _home2.default.body },
+	    _react2.default.createElement(
+	      "div",
+	      { className: _home2.default.shaded },
+	      _react2.default.createElement("div", { className: "row", style: { height: '10vh' } }),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "row" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "col-sm-4 col-sm-offset-4" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: _home2.default.title },
+	            " League Of Jerseys "
+	          )
+	        )
+	      ),
+	      _react2.default.createElement("div", { className: "row", style: { height: '20vh' } }),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "row" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "col-sm-2 col-sm-offset-5" },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { className: _home2.default.play, to: "/play" },
+	            "Play Game"
+	          )
+	        )
+	      )
+	    )
 	  );
 	};
 	
-	App.propTypes = {
-	  children: _react2.default.PropTypes.node
-	};
-	
-	exports.default = App;
+	exports.default = Home;
 
 /***/ },
 /* 263 */
-/*!**************************************!*\
-  !*** ./src/app/components/header.js ***!
-  \**************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _header = __webpack_require__(/*! ./header.css */ 264);
-	
-	var _header2 = _interopRequireDefault(_header);
-	
-	var _navbar = __webpack_require__(/*! ./navbar */ 268);
-	
-	var _navbar2 = _interopRequireDefault(_navbar);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Header = function Header() {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: _header2.default.container },
-	    _react2.default.createElement(
-	      "div",
-	      { className: _header2.default.title },
-	      "LEAGUE OF JERSEYS"
-	    ),
-	    _react2.default.createElement(_navbar2.default, null)
-	  );
-	};
-	
-	exports.default = Header;
-
-/***/ },
-/* 264 */
-/*!***************************************!*\
-  !*** ./src/app/components/header.css ***!
-  \***************************************/
+/*!*************************************!*\
+  !*** ./src/app/components/home.css ***!
+  \*************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../../~/css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./header.css */ 265);
+	var content = __webpack_require__(/*! !./../../../~/css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./home.css */ 264);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../../../~/style-loader/addStyles.js */ 267)(content, {});
@@ -29119,8 +29092,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./header.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./header.css");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./home.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./home.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -29130,27 +29103,30 @@
 	}
 
 /***/ },
-/* 265 */
-/*!*******************************************************************************************************************************!*\
-  !*** ./~/css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./src/app/components/header.css ***!
-  \*******************************************************************************************************************************/
+/* 264 */
+/*!*****************************************************************************************************************************!*\
+  !*** ./~/css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./src/app/components/home.css ***!
+  \*****************************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 266)();
+	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 265)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".header__container___27kzd {\n  position: fixed;\n  width: 100%;\n  min-height: 80px;\n  top:0px;\n  background-color: green;\n  opacity: 0.8!important;\n  z-index: 2;\n  padding-bottom: 10px;\n  -webkit-box-shadow: 0 4px 2px -2px gray;\n  -moz-box-shadow: 0 4px 2px -2px gray;\n  box-shadow: 0 4px 2px -2px gray;\n}\n\n.header__title___3GzDm {\n  color: white;\n  font-size: 40px;\n  font-weight: bold;\n  margin-top:20px;\n  margin-left: 30%;\n}\n", ""]);
+	exports.push([module.id, ".home__body___3puNU {\n  position: absolute;\n  width:100%;\n  height:100%;\n  background-image: url('https://images.unsplash.com/photo-1434648957308-5e6a859697e8');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n\n    -webkit-animation: home__fadein___GY09x 2s; /* Safari, Chrome and Opera > 12.1 */\n       -moz-animation: home__fadein___GY09x 2s; /* Firefox < 16 */\n        -ms-animation: home__fadein___GY09x 2s; /* Internet Explorer */\n         -o-animation: home__fadein___GY09x 2s; /* Opera < 12.1 */\n            animation: home__fadein___GY09x 2s;\n}\n\n@keyframes home__fadein___GY09x {\n    from { opacity: 0; }\n    to   { opacity: 1; }\n}\n\n@font-face {\n    font-family: \"stereofidelic\";\n    src: url(" + __webpack_require__(/*! ../assets/stereofidelic.ttf */ 266) + ") format(\"truetype\");\n}\n\n.home__title___1Vvqj {\n  text-align: center;\n  font-family: \"stereofidelic\";\n  font-size: 70px;\n  color: white;\n  cursor: default;\n}\n\n.home__play___2gCQ8 {\n  text-align: center;\n  font-family: Century Gothic, sans-serif;\n  font-size: 25px;\n  color: white;\n  border-radius: 100px 100px 100px 100px;\n  -moz-border-radius: 100px 100px 100px 100px;\n  -webkit-border-radius: 100px 100px 100px 100px;\n  border: 5px solid #ffffff;\n  padding: 10px;\n  cursor: pointer;\n  text-decoration: none!important;\n}\n\n.home__play___2gCQ8:hover {\n  background-color: white;\n  color:black;\n}\n\n.home__shaded___1_a17 {\n  position: absolute;\n  background-color: rgba(0, 0, 0, 0.5);\n  width:100%;\n  height: 100%;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
-		"container": "header__container___27kzd",
-		"title": "header__title___3GzDm"
+		"body": "home__body___3puNU",
+		"fadein": "home__fadein___GY09x",
+		"title": "home__title___1Vvqj",
+		"play": "home__play___2gCQ8",
+		"shaded": "home__shaded___1_a17"
 	};
 
 /***/ },
-/* 266 */
+/* 265 */
 /*!**************************************!*\
   !*** ./~/css-loader/lib/css-base.js ***!
   \**************************************/
@@ -29207,6 +29183,15 @@
 		return list;
 	};
 
+
+/***/ },
+/* 266 */
+/*!******************************************!*\
+  !*** ./src/app/assets/stereofidelic.ttf ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "02e66a101c09e8fad8c94a0f9147c51e.ttf";
 
 /***/ },
 /* 267 */
@@ -29465,12 +29450,12 @@
 
 /***/ },
 /* 268 */
-/*!**************************************!*\
-  !*** ./src/app/components/navbar.js ***!
-  \**************************************/
+/*!***********************************!*\
+  !*** ./src/app/containers/app.js ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29480,38 +29465,48 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRouter = __webpack_require__(/*! react-router */ 179);
+	var _game = __webpack_require__(/*! ./game */ 269);
+	
+	var _game2 = _interopRequireDefault(_game);
+	
+	var _league = __webpack_require__(/*! ./league */ 292);
+	
+	var _league2 = _interopRequireDefault(_league);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Navbar = function Navbar() {
+	// App container acts as presentation frame for app.
+	var App = function App(props) {
 	  return _react2.default.createElement(
-	    'div',
-	    { style: { display: 'relative', marginLeft: '5%' } },
+	    "div",
+	    null,
 	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { className: 'btn btn-default', to: '/' },
-	      ' home'
+	      "div",
+	      { className: "row" },
+	      _react2.default.createElement(_game2.default, null)
 	    ),
 	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { className: 'btn btn-default', to: '/game' },
-	      ' play game'
+	      "div",
+	      { style: { marginTop: '100vh', height: '20vh', backgroundColor: 'rgb(230,230,230)', textAlign: 'center' } },
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        "LEAGUE OF JERSEYS"
+	      )
 	    ),
 	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { className: 'btn btn-default', to: '/shop' },
-	      ' shop'
-	    ),
-	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { className: 'btn btn-default', to: '/league-table' },
-	      ' league table'
+	      "div",
+	      null,
+	      _react2.default.createElement(_league2.default, null)
 	    )
 	  );
 	};
 	
-	exports.default = Navbar;
+	App.propTypes = {
+	  children: _react2.default.PropTypes.node
+	};
+	
+	exports.default = App;
 
 /***/ },
 /* 269 */
@@ -29577,7 +29572,7 @@
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      if (this.props.products.length === 0) {
-	        this.props.getInit();
+	        this.props.getInit('random/init');
 	      }
 	    }
 	  }, {
@@ -29597,7 +29592,7 @@
 	        // react css transition group animates twoProducts fade out when they leave DOM
 	        _react2.default.createElement(
 	          "div",
-	          { className: _game2.default.game },
+	          { className: _game2.default.enterInit },
 	          _react2.default.createElement(
 	            _reactAddonsCssTransitionGroup2.default,
 	            {
@@ -29615,7 +29610,6 @@
 	                style: _this2.state,
 	                onClickProp: function onClickProp(id) {
 	                  _this2.props.selectWinner(id);
-	                  _this2.props.getProducts();
 	                }
 	              });
 	            })
@@ -29630,7 +29624,6 @@
 	
 	Game.propTypes = {
 	  selectWinner: _react2.default.PropTypes.func,
-	  getProducts: _react2.default.PropTypes.func,
 	  getInit: _react2.default.PropTypes.func,
 	  products: _react2.default.PropTypes.array
 	};
@@ -29643,14 +29636,11 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    getProducts: function getProducts() {
-	      dispatch((0, _actions.getData)());
-	    },
-	    getInit: function getInit(p) {
-	      dispatch((0, _actions.getData)(p));
+	    getInit: function getInit() {
+	      dispatch((0, _actions.getData)('random/init'));
 	    },
 	    selectWinner: function selectWinner(id) {
-	      dispatch((0, _actions.selectWinner)(id));
+	      dispatch((0, _actions.getData)('random/' + id));
 	    }
 	  };
 	};
@@ -31822,6 +31812,8 @@
 	  value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -31836,28 +31828,90 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var TwoProducts = function TwoProducts(props) {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: _twoproducts2.default.twoProducts },
-	    props.products.map(function (product, i) {
-	      return _react2.default.createElement(_product2.default, {
-	        onClickProp: props.onClickProp,
-	        key: i,
-	        style: props.order === 0 ? props.style.fadeIn : props.style.opacityZero,
-	        boxStyle: _twoproducts2.default.box,
-	        image: product.ImageLink,
-	        URL: product.buyLink,
-	        Price: product.Price,
-	        ID: product.ID
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var TwoProducts = function (_React$Component) {
+	  _inherits(TwoProducts, _React$Component);
+	
+	  function TwoProducts(props) {
+	    _classCallCheck(this, TwoProducts);
+	
+	    var _this = _possibleConstructorReturn(this, (TwoProducts.__proto__ || Object.getPrototypeOf(TwoProducts)).call(this, props));
+	
+	    _this.state = {
+	      clicked: false
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(TwoProducts, [{
+	    key: "componentWillUnmount",
+	    value: function componentWillUnmount() {
+	      clearTimeout(this.state.noClick);
+	    }
+	  }, {
+	    key: "handleClick",
+	    value: function handleClick() {
+	      var _this2 = this;
+	
+	      this.setState({
+	        clicked: true
 	      });
-	    })
-	  );
-	};
+	      this.state.noClick = setTimeout(function () {
+	        _this2.setState({
+	          clicked: false
+	        });
+	      }, 1000);
+	    }
+	  }, {
+	    key: "scrollDown",
+	    value: function scrollDown() {
+	      // TODO: implement scrollDown
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var _this3 = this;
+	
+	      return _react2.default.createElement(
+	        "div",
+	        { className: _twoproducts2.default.twoProducts, ref: "ok" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: _twoproducts2.default.versus },
+	          " V s "
+	        ),
+	        this.props.products.map(function (product, i) {
+	          return _react2.default.createElement(_product2.default, {
+	            handleClick: function handleClick() {
+	              _this3.handleClick();
+	            },
+	            onClickProp: _this3.props.onClickProp,
+	            clicked: _this3.state.clicked,
+	            noPointer: _twoproducts2.default.noPointer,
+	            key: i,
+	            boxStyle: _this3.props.order === 2 ? _twoproducts2.default.boxIn : _twoproducts2.default.box,
+	            image: product.ImageLink,
+	            buyLink: product.buyLink,
+	            Price: product.Price,
+	            ID: product.ID
+	          });
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return TwoProducts;
+	}(_react2.default.Component);
 	
 	TwoProducts.propTypes = {
 	  products: _react2.default.PropTypes.array,
-	  style: _react2.default.PropTypes.object
+	  order: _react2.default.PropTypes.number,
+	  onClickProp: _react2.default.PropTypes.func
 	};
 	
 	exports.default = TwoProducts;
@@ -31910,7 +31964,7 @@
 	  _createClass(Product, [{
 	    key: "componentWillUnmount",
 	    value: function componentWillUnmount() {
-	      clearInterval(this.state.noClick);
+	      clearTimeout(this.state.noClick);
 	    }
 	  }, {
 	    key: "handleClick",
@@ -31934,39 +31988,29 @@
 	
 	      return _react2.default.createElement(
 	        "div",
-	        { className: this.props.boxStyle },
+	        {
+	          className: this.props.boxStyle + " " + (this.props.clicked === true ? _product2.default.noPointer : null),
+	          style: { backgroundImage: "url(\"" + this.props.image + "\")" },
+	          onClick: function onClick() {
+	            _this3.handleClick();
+	            _this3.props.handleClick();
+	            _this3.props.onClickProp(_this3.props.ID);
+	          }
+	        },
 	        _react2.default.createElement(
 	          "div",
-	          { className: this.props.style },
+	          { className: _product2.default.shading },
 	          _react2.default.createElement(
-	            "div",
-	            { className: _product2.default.btntainer },
+	            "a",
+	            { href: this.props.buyLink, target: "_blank" },
 	            _react2.default.createElement(
 	              "button",
-	              {
-	                className: "btn btn-default " + _product2.default.fifty + " " + this.state.style,
-	                onClick: function onClick() {
-	                  _this3.handleClick();
-	                  _this3.props.onClickProp(_this3.props.ID);
-	                }
-	              },
-	              "Winner"
-	            ),
-	            _react2.default.createElement(
-	              "button",
-	              { className: "btn btn-default " + _product2.default.fifty },
-	              " more info "
+	              { className: _product2.default.buy },
+	              " PURCHASE "
 	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            {
-	              className: _product2.default.boximage,
-	              style: { backgroundImage: "url(\"" + this.props.image + "\")" }
-	            },
-	            this.state.clicked === true ? _react2.default.createElement("span", { className: "glyphicon glyphicon-heart + " + _product2.default.heart }) : null
 	          )
-	        )
+	        ),
+	        this.state.clicked === true ? _react2.default.createElement("span", { className: "glyphicon glyphicon-heart + " + _product2.default.heart }) : null
 	      );
 	    }
 	  }]);
@@ -31976,10 +32020,12 @@
 	
 	Product.propTypes = {
 	  boxStyle: _react2.default.PropTypes.string,
-	  style: _react2.default.PropTypes.string,
 	  onClickProp: _react2.default.PropTypes.func,
+	  handleClick: _react2.default.PropTypes.func,
 	  ID: _react2.default.PropTypes.number,
-	  image: _react2.default.PropTypes.string
+	  clicked: _react2.default.PropTypes.bool,
+	  image: _react2.default.PropTypes.string,
+	  buyLink: _react2.default.PropTypes.string
 	};
 	
 	exports.default = Product;
@@ -32020,22 +32066,21 @@
   \********************************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 266)();
+	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 265)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".product__heart___2GNLH {\ntext-align: center;\nfont-size: 70px;\ncolor:limegreen;\nmargin-left: 40%;\nmargin-top: 40%;\nanimation: product__heartbeat___3Z2k2 1000ms forwards;\n}\n\n@keyframes product__heartbeat___3Z2k2\n{\n  0% {\n    opacity: 0;\n    transform: scale(2.5 );\n  }\n  70% {\n    opacity: 1;\n    transform: scale( 3 );\n  }\n  100% {\n    opacity: 1;\n    transform: scale( 3 );\n  }\n}\n\n.product__boximage___2efO1 {\n  margin-top: 20px;\n  height:30vw;\n  min-height: 200px;\n  min-width: 200px;\n    background-size: contain;\n    background-repeat: no-repeat;\n    background-position: center;\n}\n\n.product__noClicks___t8pZq {\n  pointer-events: none;\n}\n\n.product__bottom___1GB96 {\n  position: relative;\n  bottom:-10px;\n}\n\n.product__btntainer___nef2b {\n  height:50px;\n  width:100%;\n}\n\n.product__fifty___1oxFh {\n  width:50%;\n  height:50px;\n  font-size: 25px;\n}\n", ""]);
+	exports.push([module.id, ".product__heart___2GNLH {\nposition: absolute;\nmargin-left: 22%;\ntop:50%;\ntext-align: center;\nfont-size: 70px;\ncolor:red;\nanimation: product__heartbeat___3Z2k2 1000ms forwards;\n}\n\n@keyframes product__heartbeat___3Z2k2\n{\n  0% {\n    opacity: 0;\n    transform: scale(2.5 );\n  }\n  70% {\n    opacity: 1;\n    transform: scale( 3 );\n  }\n  100% {\n    opacity: 1;\n    transform: scale( 3 );\n  }\n}\n\n.product__shading___xLBzr {\n  background-color: rgba(0, 0, 0, 0.2);\n  height:100%;\n  width:100%;\n  transition: background-color 1000ms;\n  cursor: pointer;\n}\n\n.product__shading___xLBzr:hover {\n  background-color: rgba(0, 0, 0, 0);\n  transition: background-color 1000ms;\n}\n\n\n.product__boximage___2efO1 {\n  margin-top: 20px;\n  height:30vw;\n  min-height: 200px;\n  min-width: 200px;\n    background-size: contain;\n    background-repeat: no-repeat;\n    background-position: center;\n}\n\n.product__buy___254gw {\n  position: absolute;\n  font-family: \"Arial\";\n  bottom: 10px;\n  margin-left:25%;\n  height:50px;\n  transform: translateX(-50%);\n  vertical-align: middle;\n  line-height: 0;\n  font-size: 20px;\n  background-color: rgb(55,55,55);\n  color:white;\n  padding: 25px;\n  transition: background-color 300ms;\n  border: none;\n  text-align: center;\n}\n\n.product__buy___254gw:hover {\n  transition: background-color 300ms;\n  background-color: rgb(155,155,155);\n}\n\n.product__buy___254gw:focus {\n  outline: 0;\n}\n\n.product__noPointer___ImjV_ {\n  pointer-events: none;\n  cursor: pointer!important;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
 		"heart": "product__heart___2GNLH",
 		"heartbeat": "product__heartbeat___3Z2k2",
+		"shading": "product__shading___xLBzr",
 		"boximage": "product__boximage___2efO1",
-		"noClicks": "product__noClicks___t8pZq",
-		"bottom": "product__bottom___1GB96",
-		"btntainer": "product__btntainer___nef2b",
-		"fifty": "product__fifty___1oxFh"
+		"buy": "product__buy___254gw",
+		"noPointer": "product__noPointer___ImjV_"
 	};
 
 /***/ },
@@ -32074,17 +32119,22 @@
   \************************************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 266)();
+	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 265)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".twoproducts__twoProducts___26AmC {\n  display: flex;\n  position: relative;\n  flex-direction: row;\n  width:100%;\n  max-height: 500px;\n}\n\n.twoproducts__box___2RVhv {\n  margin: 30px;\n  height: 50%;\n  width:50%;\n  min-width: 150px;\n  position: relative;\n  background-repeat: no-repeat;\n}\n", ""]);
+	exports.push([module.id, ".twoproducts__twoProducts___26AmC {\n  position: absolute;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-justify-content: center;\n  justify-content: center;\n  height: 100%;\n  width: 100%;\n  background-color: white;\n}\n\n.twoproducts__box___2RVhv {\n  background-repeat: no-repeat;\n  background-size:70%;\n  background-position: center;\n  width: 50%;\n  height: 100%;\n  opacity: 0;\n}\n\n.twoproducts__boxIn___3qwsM {\n  background-repeat: no-repeat;\n  background-size:70%;\n  background-position: center;\n  width: 50%;\n  height: 100%;\n  animation: twoproducts__fade-in___3Btsz 1500ms forwards;\n}\n\n.twoproducts__scrollDown___3hRRR {\n  color:rgb(55,55,55);\n  font-size: 60px;\n  border-radius: 80px;\n  position:absolute;\n  margin-top: 75vh;\n  z-index: 10;\n}\n\n.twoproducts__scrollDown___3hRRR:hover {\n  color:rgb(155,155,155);\n}\n\n.twoproducts__versus___2U6jR {\n  background-color: rgb(55,55,55);\n  color:white;\n  font-size: 60px;\n  border-radius: 80px;\n  position:absolute;\n  padding-left: 30px;\n  padding-right: 30px;\n  padding-top: 20px;\n  padding-bottom: 15px;\n  margin-top: 40vh;\n  font-family: \"stereofidelic\";\n  z-index: 10;\n}\n\n.twoproducts__opacityZero___3nGpE {\n  opacity: 0;\n  pointer-events: none;\n}\n\n@keyframes twoproducts__fade-in___3Btsz {\n  0% {\n  opacity: 0;\n  }\n  67% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
 		"twoProducts": "twoproducts__twoProducts___26AmC",
-		"box": "twoproducts__box___2RVhv"
+		"box": "twoproducts__box___2RVhv",
+		"boxIn": "twoproducts__boxIn___3qwsM",
+		"fade-in": "twoproducts__fade-in___3Btsz",
+		"scrollDown": "twoproducts__scrollDown___3hRRR",
+		"versus": "twoproducts__versus___2U6jR",
+		"opacityZero": "twoproducts__opacityZero___3nGpE"
 	};
 
 /***/ },
@@ -32123,16 +32173,15 @@
   \*****************************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 266)();
+	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 265)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".game__game___31EZR {\n  display: block;\n  margin-top:100px;\n  max-width: 800px;\n  min-width: 500px;\n  height: 50vw;\n  min-height: 300px;\n  max-height: 550px;\n  width:90%;\n  margin-left: 5%;\n  padding-bottom: 20px;\n  overflow: hidden;\n}\n\n.game__opacityZero___VQVit {\n  opacity: 0\n}\n\n.game__enterActive___dqkiD {\n  animation: game__fade-in-extended___2J473 1500ms forwards;\n}\n\n.game__enterInit___2rS3D {\n  animation: game__fade-in___3FblQ 500ms forwards;\n}\n\n@keyframes game__fade-in___3FblQ {\n  0% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n@keyframes game__fade-in-extended___2J473 {\n  0% {\n  opacity: 0;\n  }\n  67% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n.game__leave___1XXXf {\nopacity: 1;\n}\n\n.game__leave___1XXXf.game__leaveActive___2kEXr {\n  animation: game__fade-out___Wzlow 1000ms forwards;\n}\n\n@keyframes game__fade-out___Wzlow {\n  0% {\n  opacity: 1;\n  }\n  50% {\n  opacity: 1;\n  }\n  100% {\n  opacity: 0;\n  }\n}\n", ""]);
+	exports.push([module.id, "\n.game__opacityZero___VQVit {\n  opacity: 0\n}\n\n.game__enterActive___dqkiD {\n  animation: game__fade-in-extended___2J473 1500ms forwards;\n}\n\n.game__enterInit___2rS3D {\n  animation: game__fade-in___3FblQ 500ms forwards;\n}\n\n@keyframes game__fade-in___3FblQ {\n  0% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n@keyframes game__fade-in-extended___2J473 {\n  0% {\n  opacity: 0;\n  }\n  67% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n.game__leave___1XXXf {\nopacity: 1;\n}\n\n.game__leave___1XXXf.game__leaveActive___2kEXr {\n  animation: game__fade-out___Wzlow 1000ms forwards;\n}\n\n@keyframes game__fade-out___Wzlow {\n  0% {\n      opacity: 1;\n  }\n  75% {\n      opacity: 1;\n  }\n  100% {\n  opacity: 0;\n  }\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
-		"game": "game__game___31EZR",
 		"opacityZero": "game__opacityZero___VQVit",
 		"enterActive": "game__enterActive___dqkiD",
 		"fade-in-extended": "game__fade-in-extended___2J473",
@@ -32159,10 +32208,12 @@
 	  var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "random/";
 	  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "PRODUCTS";
 	
-	  var baseUrl = "http://localhost:3001/";
+	  var baseUrl = "/api/";
+	  var myHeaders = new Headers();
+	  myHeaders.append("X-Requested-With", "XMLHttpRequest");
 	  return function (dispatch) {
 	    dispatch(getRequest());
-	    return fetch(baseUrl + path).then(function (response) {
+	    return fetch(baseUrl + path, { headers: myHeaders }).then(function (response) {
 	      if (response.status !== 200) {
 	        throw new Error(response.status + " " + response.statusText);
 	      }
@@ -32213,106 +32264,6 @@
 
 /***/ },
 /* 292 */
-/*!***************************************!*\
-  !*** ./src/app/containers/gallery.js ***!
-  \***************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 234);
-	
-	var _actions = __webpack_require__(/*! ../actions/actions */ 291);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Gallery = function (_React$Component) {
-	  _inherits(Gallery, _React$Component);
-	
-	  function Gallery() {
-	    _classCallCheck(this, Gallery);
-	
-	    return _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).apply(this, arguments));
-	  }
-	
-	  _createClass(Gallery, [{
-	    key: "render",
-	
-	    // componentDidMount() {
-	    //   this.props.getInit('gallery/0');
-	    // }
-	
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement(
-	          "div",
-	          null,
-	          this.props.products.map(function (product, i) {
-	            return _react2.default.createElement(
-	              "div",
-	              { key: i },
-	              i + " and " + product.Title
-	            );
-	          })
-	        ),
-	        _react2.default.createElement(
-	          "button",
-	          { onClick: function onClick() {} },
-	          "click me"
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Gallery;
-	}(_react2.default.Component);
-	
-	Gallery.propTypes = {
-	  products: _react2.default.PropTypes.array
-	};
-	
-	// mapStateToProps tells React which properties of global state do we want to
-	// use in this component (users, error obj) and to which local properties we want to map them,
-	// so that they are accessible in from this.props
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    products: state.products
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    getProducts: function getProducts(id) {
-	      dispatch((0, _actions.getData)(id));
-	    },
-	    getInit: function getInit(p) {
-	      dispatch((0, _actions.getData)(p));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Gallery);
-
-/***/ },
-/* 293 */
 /*!**************************************!*\
   !*** ./src/app/containers/league.js ***!
   \**************************************/
@@ -32332,9 +32283,13 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 234);
 	
+	var _reactAddonsCssTransitionGroup = __webpack_require__(/*! react-addons-css-transition-group */ 270);
+	
+	var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+	
 	var _actions = __webpack_require__(/*! ../actions/actions */ 291);
 	
-	var _league = __webpack_require__(/*! ./league.css */ 294);
+	var _league = __webpack_require__(/*! ./league.css */ 293);
 	
 	var _league2 = _interopRequireDefault(_league);
 	
@@ -32384,69 +32339,51 @@
 	      var wentUp = _react2.default.createElement("span", { className: "glyphicon glyphicon-triangle-top " + _league2.default.increase });
 	      var wentDown = _react2.default.createElement("span", { className: "glyphicon glyphicon-triangle-bottom " + _league2.default.decrease });
 	      return _react2.default.createElement(
-	        "table",
-	        {
-	          className: "table table-striped table-bordered table-hover " + _league2.default.table + ' ' + _league2.default.enterInit
-	        },
+	        "div",
+	        { className: _league2.default.body },
 	        _react2.default.createElement(
-	          "tbody",
-	          null,
+	          _reactAddonsCssTransitionGroup2.default,
+	          {
+	            transitionName: _league2.default,
+	            transitionEnterTimeout: 500,
+	            transitionLeave: false
+	          },
 	          _react2.default.createElement(
-	            "tr",
-	            null,
-	            _react2.default.createElement(
-	              "th",
-	              null,
-	              "Position"
-	            ),
-	            _react2.default.createElement(
-	              "th",
-	              null,
-	              "Points"
-	            ),
-	            _react2.default.createElement(
-	              "th",
-	              null,
-	              "Shirt"
-	            ),
-	            _react2.default.createElement(
-	              "th",
-	              null,
-	              "More info bro"
-	            )
-	          ),
-	          this.props.Present.map(function (shirt, i) {
-	            return _react2.default.createElement(
-	              "tr",
-	              { key: i },
-	              _react2.default.createElement(
-	                "td",
-	                null,
-	                i + 1 + ' ',
-	                i < _this3.props.PastOrder.indexOf(shirt.ID) || _this3.props.PastOrder.indexOf(shirt.ID) === -1 ? wentUp : null,
-	                i > _this3.props.PastOrder.indexOf(shirt.ID) && _this3.props.PastOrder.indexOf(shirt.ID) !== -1 ? wentDown : null
-	              ),
-	              _react2.default.createElement(
-	                "td",
-	                null,
-	                "" + shirt.Points
-	              ),
-	              _react2.default.createElement(
-	                "td",
-	                null,
-	                "" + shirt.Title
-	              ),
-	              _react2.default.createElement(
-	                "td",
-	                null,
+	            "div",
+	            { className: _league2.default.gallery },
+	            this.props.Present.map(function (product, i) {
+	              return _react2.default.createElement(
+	                "div",
+	                { className: _league2.default.box, key: product.ID },
 	                _react2.default.createElement(
-	                  "a",
-	                  { href: "" + shirt.OurAffLink },
-	                  "" + shirt.Price
+	                  "div",
+	                  { className: _league2.default.image, style: { backgroundImage: "url('" + product.ImageLink + "')" } },
+	                  _react2.default.createElement(
+	                    "div",
+	                    { className: _league2.default.shading },
+	                    _react2.default.createElement(
+	                      "h1",
+	                      null,
+	                      "\xA0\xA0",
+	                      "" + (i + 1),
+	                      i < _this3.props.PastOrder.indexOf(product.ID) || _this3.props.PastOrder.indexOf(product.ID) === -1 ? wentUp : null,
+	                      i > _this3.props.PastOrder.indexOf(product.ID) && _this3.props.PastOrder.indexOf(product.ID) !== -1 ? wentDown : null
+	                    ),
+	                    _react2.default.createElement("h2", null),
+	                    _react2.default.createElement(
+	                      "a",
+	                      { href: "" + product.buyLink, target: "_blank" },
+	                      _react2.default.createElement(
+	                        "div",
+	                        { className: _league2.default.buy },
+	                        "\xA3 " + Math.ceil(parseFloat(product.Price))
+	                      )
+	                    )
+	                  )
 	                )
-	              )
-	            );
-	          })
+	              );
+	            })
+	          )
 	        )
 	      );
 	    }
@@ -32483,7 +32420,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(League);
 
 /***/ },
-/* 294 */
+/* 293 */
 /*!***************************************!*\
   !*** ./src/app/containers/league.css ***!
   \***************************************/
@@ -32492,7 +32429,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../../~/css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./league.css */ 295);
+	var content = __webpack_require__(/*! !./../../../~/css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./league.css */ 294);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../../../~/style-loader/addStyles.js */ 267)(content, {});
@@ -32512,31 +32449,38 @@
 	}
 
 /***/ },
-/* 295 */
+/* 294 */
 /*!*******************************************************************************************************************************!*\
   !*** ./~/css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!./src/app/containers/league.css ***!
   \*******************************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 266)();
+	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 265)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".league__table___3T-VZ {\n  margin-top: 150px;\n  margin-left: 20px;\n  margin-right: 20px;\n  max-width: 800px;\n  min-width: 500px;\n}\n\n.league__enterInit___HklRz {\n  animation: league__fade-in___JpoEc 500ms forwards;\n}\n\n.league__increase___1XYhO {\n  color: green;\n  animation: league__fade-out___1ETie 1500ms forwards;\n}\n\n.league__decrease___2T4dY {\n  color: red;\n  animation: league__fade-out___1ETie 1500ms forwards;\n}\n\n\n@keyframes league__fade-in___JpoEc {\n  0% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n@keyframes league__fade-out___1ETie {\n  0% {\n  opacity: 1;\n  }\n  100% {\n  opacity: 0;\n  }\n}\n", ""]);
+	exports.push([module.id, ".league__shaded___3lyDz {\n  position: absolute;\n  background-color: rgba(0, 0, 0, 0.3);\n  width:100%;\n  height: 100%;\n}\n\n.league__shading___3sUY7 {\n  background-color: rgba(0, 0, 0, 0);\n  position: absolute;\n  height:100%;\n  width:100%;\n  transition: background-color 1000ms;\n  cursor: pointer;\n}\n\n.league__shading___3sUY7:hover {\n  background-color: rgba(0, 0, 0, 0.1);\n  transition: background-color 1000ms;\n}\n\n.league__buy___1zcf0 {\n  position: absolute;\n  font-family: \"Arial\";\n  bottom: 10px;\n  margin-left:25%;\n  height:50px;\n  transform: translateX(-50%);\n  vertical-align: middle;\n  line-height: 0.5;\n  font-size: 20px;\n  border-radius: 20px;\n  background-color: rgb(55,55,55);\n  color:white;\n  padding: 20px;\n  transition: background-color 300ms;\n  border: none;\n  text-align: center;\n}\n\n.league__buy___1zcf0:hover {\n  transition: background-color 300ms;\n  background-color: rgb(155,155,155);\n}\n\n.league__body___2i_aa {\n  position: relative;\n  width:100%;\n  min-height: 1040px;\n  height:100%;\n  background-color: white;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n\n    -webkit-animation: league__fadein___3M6zW 2s; /* Safari, Chrome and Opera > 12.1 */\n       -moz-animation: league__fadein___3M6zW 2s; /* Firefox < 16 */\n        -ms-animation: league__fadein___3M6zW 2s; /* Internet Explorer */\n         -o-animation: league__fadein___3M6zW 2s; /* Opera < 12.1 */\n            animation: league__fadein___3M6zW 2s;\n}\n\n.league__gallery___9BPYf {\n    background-color: white;\n    overflow: hidden;\n    min-height: 600px;\n    width: 100%;\n}\n\n.league__box___3xKEE {\n    width: 33%;\n    padding-bottom: 30%;\n    position: relative;\n    float: left;\n    opacity: 0;\n    animation: league__fade-in___JpoEc 500ms forwards;\n}\n\n.league__image___ulYH0 {\n    background-repeat: no-repeat;\n    background-size: 80% 70%;\n    height:100%;\n    width:100%;\n    position: absolute;\n    background-position: center;\n}\n\n@media only screen and (max-width : 500px) {\n   /* Smartphone view: 1 tile */\n   .league__box___3xKEE {\n      width: 100%;\n      padding-bottom: 100%;\n   }\n}\n@media only screen and (max-width : 890px) and (min-width : 501px) {\n   /* Tablet view: 2 tiles */\n   .league__box___3xKEE {\n      width: 50%;\n      padding-bottom: 50%;\n   }\n}\n@media only screen  and (min-width : 891px) {\n   /* Small desktop / ipad view: 3 tiles */\n   .league__box___3xKEE {\n      width: 33.3%;\n      padding-bottom: 33.3%;\n   }\n}\n\n\n\n.league__enterInit___HklRz {\n  animation: league__fade-in___JpoEc 500ms forwards;\n}\n\n.league__increase___1XYhO {\n  color: green;\n  animation: league__fade-out___1ETie 1500ms forwards;\n}\n\n.league__decrease___2T4dY {\n  color: red;\n  animation: league__fade-out___1ETie 1500ms forwards;\n}\n\n\n@keyframes league__fade-in___JpoEc {\n  0% {\n  opacity: 0;\n  }\n  100% {\n  opacity: 1;\n  }\n}\n\n@keyframes league__fade-out___1ETie {\n  0% {\n  opacity: 1;\n  }\n  100% {\n  opacity: 0;\n  }\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
-		"table": "league__table___3T-VZ",
-		"enterInit": "league__enterInit___HklRz",
+		"shaded": "league__shaded___3lyDz",
+		"shading": "league__shading___3sUY7",
+		"buy": "league__buy___1zcf0",
+		"body": "league__body___2i_aa",
+		"fadein": "league__fadein___3M6zW",
+		"gallery": "league__gallery___9BPYf",
+		"box": "league__box___3xKEE",
 		"fade-in": "league__fade-in___JpoEc",
+		"image": "league__image___ulYH0",
+		"enterInit": "league__enterInit___HklRz",
 		"increase": "league__increase___1XYhO",
 		"fade-out": "league__fade-out___1ETie",
 		"decrease": "league__decrease___2T4dY"
 	};
 
 /***/ },
-/* 296 */
+/* 295 */
 /*!***********************************!*\
   !*** ./src/app/configurestore.js ***!
   \***********************************/
@@ -32550,19 +32494,19 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 241);
 	
-	var _reduxLogger = __webpack_require__(/*! redux-logger */ 297);
+	var _reduxLogger = __webpack_require__(/*! redux-logger */ 296);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 303);
+	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 302);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _index = __webpack_require__(/*! ./reducers/index */ 304);
+	var _index = __webpack_require__(/*! ./reducers/index */ 303);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _localStorage = __webpack_require__(/*! ./localStorage */ 309);
+	var _localStorage = __webpack_require__(/*! ./localStorage */ 308);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32584,7 +32528,7 @@
 	exports.default = configureStore;
 
 /***/ },
-/* 297 */
+/* 296 */
 /*!*************************************!*\
   !*** ./~/redux-logger/lib/index.js ***!
   \*************************************/
@@ -32598,11 +32542,11 @@
 	  value: true
 	});
 	
-	var _core = __webpack_require__(/*! ./core */ 298);
+	var _core = __webpack_require__(/*! ./core */ 297);
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 299);
+	var _helpers = __webpack_require__(/*! ./helpers */ 298);
 	
-	var _defaults = __webpack_require__(/*! ./defaults */ 302);
+	var _defaults = __webpack_require__(/*! ./defaults */ 301);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -32705,7 +32649,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 298 */
+/* 297 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/core.js ***!
   \************************************/
@@ -32718,9 +32662,9 @@
 	});
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 299);
+	var _helpers = __webpack_require__(/*! ./helpers */ 298);
 	
-	var _diff = __webpack_require__(/*! ./diff */ 300);
+	var _diff = __webpack_require__(/*! ./diff */ 299);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -32849,7 +32793,7 @@
 	}
 
 /***/ },
-/* 299 */
+/* 298 */
 /*!***************************************!*\
   !*** ./~/redux-logger/lib/helpers.js ***!
   \***************************************/
@@ -32876,7 +32820,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 300 */
+/* 299 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/diff.js ***!
   \************************************/
@@ -32889,7 +32833,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(/*! deep-diff */ 301);
+	var _deepDiff = __webpack_require__(/*! deep-diff */ 300);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -32975,7 +32919,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 301 */
+/* 300 */
 /*!******************************!*\
   !*** ./~/deep-diff/index.js ***!
   \******************************/
@@ -33407,7 +33351,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 302 */
+/* 301 */
 /*!****************************************!*\
   !*** ./~/redux-logger/lib/defaults.js ***!
   \****************************************/
@@ -33461,7 +33405,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 303 */
+/* 302 */
 /*!************************************!*\
   !*** ./~/redux-thunk/lib/index.js ***!
   \************************************/
@@ -33492,7 +33436,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 304 */
+/* 303 */
 /*!***********************************!*\
   !*** ./src/app/reducers/index.js ***!
   \***********************************/
@@ -33506,19 +33450,19 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 241);
 	
-	var _products = __webpack_require__(/*! ./products */ 305);
+	var _products = __webpack_require__(/*! ./products */ 304);
 	
 	var _products2 = _interopRequireDefault(_products);
 	
-	var _chosenshirt = __webpack_require__(/*! ./chosenshirt */ 306);
+	var _chosenshirt = __webpack_require__(/*! ./chosenshirt */ 305);
 	
 	var _chosenshirt2 = _interopRequireDefault(_chosenshirt);
 	
-	var _gallery = __webpack_require__(/*! ./gallery */ 307);
+	var _gallery = __webpack_require__(/*! ./gallery */ 306);
 	
 	var _gallery2 = _interopRequireDefault(_gallery);
 	
-	var _league = __webpack_require__(/*! ./league */ 308);
+	var _league = __webpack_require__(/*! ./league */ 307);
 	
 	var _league2 = _interopRequireDefault(_league);
 	
@@ -33532,7 +33476,7 @@
 	}); // root reducer
 
 /***/ },
-/* 305 */
+/* 304 */
 /*!**************************************!*\
   !*** ./src/app/reducers/products.js ***!
   \**************************************/
@@ -33558,7 +33502,7 @@
 	exports.default = productsReducer;
 
 /***/ },
-/* 306 */
+/* 305 */
 /*!*****************************************!*\
   !*** ./src/app/reducers/chosenshirt.js ***!
   \*****************************************/
@@ -33588,7 +33532,7 @@
 	exports.default = chosenReducer;
 
 /***/ },
-/* 307 */
+/* 306 */
 /*!*************************************!*\
   !*** ./src/app/reducers/gallery.js ***!
   \*************************************/
@@ -33614,7 +33558,7 @@
 	exports.default = galleryReducer;
 
 /***/ },
-/* 308 */
+/* 307 */
 /*!************************************!*\
   !*** ./src/app/reducers/league.js ***!
   \************************************/
@@ -33658,7 +33602,7 @@
 	exports.default = leagueReducer;
 
 /***/ },
-/* 309 */
+/* 308 */
 /*!*********************************!*\
   !*** ./src/app/localStorage.js ***!
   \*********************************/

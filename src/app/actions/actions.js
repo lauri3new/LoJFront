@@ -1,8 +1,12 @@
 export const getData = (path = "random/", type = "PRODUCTS") => {
-  const baseUrl = "http://localhost:3001/";
+  // dev or prod
+  // const baseUrl = "/api/";
+  const baseUrl = "http://localhost:3001/api/";
+  const myHeaders = new Headers();
+  myHeaders.append("X-Requested-With", "XMLHttpRequest");
   return (dispatch) => {
     dispatch(getRequest());
-    return fetch(baseUrl + path)
+    return fetch(baseUrl + path, { headers: myHeaders })
   .then(
     (response) => {
       if (response.status !== 200) {

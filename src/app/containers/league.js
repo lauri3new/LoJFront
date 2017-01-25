@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getData } from "../actions/actions";
 import Styles from "./league.css";
 
@@ -26,40 +27,37 @@ class League extends React.Component {
     const wentUp = <span className={`glyphicon glyphicon-triangle-top ${Styles.increase}`} />;
     const wentDown = <span className={`glyphicon glyphicon-triangle-bottom ${Styles.decrease}`} />;
     return (
-      <table
-        className={"table table-striped table-bordered table-hover " + Styles.table + ' ' + Styles.enterInit}
-      >
-        <tbody>
-          <tr>
-            <th>Position</th>
-            <th>Points</th>
-            <th>Shirt</th>
-            <th>More info bro</th>
-          </tr>
-          {this.props.Present.map((shirt, i) => {
+      <div className={Styles.body}>
+        <ReactCSSTransitionGroup
+          transitionName={Styles}
+          transitionEnterTimeout={500}
+          transitionLeave={false}
+        >
+          <div className={Styles.gallery} >
+          {this.props.Present.map((product, i) => {
             return (
-              <tr key={i}>
-                <td>
-                  {i + 1 + ' '}
-                  {i < this.props.PastOrder.indexOf(shirt.ID) || this.props.PastOrder.indexOf(shirt.ID) === -1 ? wentUp : null}
-                  {i > this.props.PastOrder.indexOf(shirt.ID) && this.props.PastOrder.indexOf(shirt.ID) !== -1 ? wentDown : null}
-                </td>
-                <td>
-                  {`${shirt.Points}`}
-                </td>
-                <td>
-                  {`${shirt.Title}`}
-                </td>
-                <td>
-                  <a href={`${shirt.OurAffLink}`}>
-                    {`${shirt.Price}`}
+              <div className={Styles.box} key={product.ID}>
+                <div className={Styles.image} style={{ backgroundImage: `url('${product.ImageLink}')` }} >
+                <div className={Styles.shading} >
+                  <h1>
+                    &nbsp;&nbsp;{`${i + 1}`}
+                    {i < this.props.PastOrder.indexOf(product.ID) || this.props.PastOrder.indexOf(product.ID) === -1 ? wentUp : null}
+                    {i > this.props.PastOrder.indexOf(product.ID) && this.props.PastOrder.indexOf(product.ID) !== -1 ? wentDown : null}
+                  </h1>
+                  <h2></h2>
+                  <a href={`${product.buyLink}`} target="_blank" >
+                    <div className={Styles.buy}>
+                    {`£ ${Math.ceil(parseFloat(product.Price))}`}
+                    </div>
                   </a>
-                </td>
-              </tr>
+                </div>
+                </div>
+              </div>
             );
           })}
-        </tbody>
-      </table>
+              </div>
+        </ReactCSSTransitionGroup>
+      </div>
     );
   }
 }

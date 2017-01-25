@@ -1,9 +1,10 @@
 .heart {
+position: absolute;
+margin-left: 22%;
+top:50%;
 text-align: center;
 font-size: 70px;
-color:limegreen;
-margin-left: 40%;
-margin-top: 40%;
+color:red;
 animation: heartbeat 1000ms forwards;
 }
 
@@ -23,6 +24,20 @@ animation: heartbeat 1000ms forwards;
   }
 }
 
+.shading {
+  background-color: rgba(0, 0, 0, 0.2);
+  height:100%;
+  width:100%;
+  transition: background-color 1000ms;
+  cursor: pointer;
+}
+
+.shading:hover {
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 1000ms;
+}
+
+
 .boximage {
   margin-top: 20px;
   height:30vw;
@@ -33,22 +48,34 @@ animation: heartbeat 1000ms forwards;
     background-position: center;
 }
 
-.noClicks {
+.buy {
+  position: absolute;
+  font-family: "Arial";
+  bottom: 10px;
+  margin-left:25%;
+  height:50px;
+  transform: translateX(-50%);
+  vertical-align: middle;
+  line-height: 0;
+  font-size: 20px;
+  background-color: rgb(55,55,55);
+  color:white;
+  padding: 25px;
+  transition: background-color 300ms;
+  border: none;
+  text-align: center;
+}
+
+.buy:hover {
+  transition: background-color 300ms;
+  background-color: rgb(155,155,155);
+}
+
+.buy:focus {
+  outline: 0;
+}
+
+.noPointer {
   pointer-events: none;
-}
-
-.bottom {
-  position: relative;
-  bottom:-10px;
-}
-
-.btntainer {
-  height:50px;
-  width:100%;
-}
-
-.fifty {
-  width:50%;
-  height:50px;
-  font-size: 25px;
+  cursor: pointer!important;
 }

@@ -10,7 +10,7 @@ class Product extends React.Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.noClick);
+    clearTimeout(this.state.noClick);
   }
 
   handleClick() {
@@ -26,27 +26,21 @@ class Product extends React.Component {
 
   render() {
     return (
-      <div className={this.props.boxStyle} >
-        <div className={this.props.style} >
-          <div className={Styles.btntainer} >
-            <button
-              className={`btn btn-default ${Styles.fifty} ${this.state.style}`}
-              onClick={() => {
-                this.handleClick();
-                this.props.onClickProp(this.props.ID);
-              }}
-            >
-              Winner
-            </button>
-            <button className={`btn btn-default ${Styles.fifty}`}> more info </button>
-          </div>
-          <div
-            className={Styles.boximage}
-            style={{ backgroundImage: `url("${this.props.image}")` }}
-          >
-            {this.state.clicked === true ? <span className={`glyphicon glyphicon-heart + ${Styles.heart}`} /> : null}
-          </div>
+      <div
+        className={`${this.props.boxStyle} ${this.props.clicked === true ? Styles.noPointer : null}`}
+        style={{ backgroundImage: `url("${this.props.image}")` }}
+        onClick={() => {
+          this.handleClick();
+          this.props.handleClick();
+          this.props.onClickProp(this.props.ID);
+        }}
+      >
+        <div className={Styles.shading} >
+          <a href={this.props.buyLink} target="_blank" >
+            <button className={Styles.buy}> PURCHASE </button>
+          </a>
         </div>
+        {this.state.clicked === true ? <span className={`glyphicon glyphicon-heart + ${Styles.heart}`} /> : null}
       </div>
     );
   }
@@ -54,10 +48,12 @@ class Product extends React.Component {
 
 Product.propTypes = {
   boxStyle: React.PropTypes.string,
-  style: React.PropTypes.string,
   onClickProp: React.PropTypes.func,
+  handleClick: React.PropTypes.func,
   ID: React.PropTypes.number,
-  image: React.PropTypes.string
+  clicked: React.PropTypes.bool,
+  image: React.PropTypes.string,
+  buyLink: React.PropTypes.string
 };
 
 export default Product;

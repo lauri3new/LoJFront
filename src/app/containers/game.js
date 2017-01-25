@@ -18,7 +18,7 @@ class Game extends React.Component {
 
   componentDidMount() {
     if (this.props.products.length === 0) {
-      this.props.getInit();
+      this.props.getInit('random/init');
     }
   }
 
@@ -32,7 +32,7 @@ class Game extends React.Component {
   render() {
     return (
 // react css transition group animates twoProducts fade out when they leave DOM
-      <div className={Styles.game}>
+      <div className={Styles.enterInit}>
         <ReactCSSTransitionGroup
           transitionName={Styles}
           transitionEnter={false}
@@ -49,7 +49,6 @@ class Game extends React.Component {
                 style={this.state}
                 onClickProp={(id) => {
                   this.props.selectWinner(id);
-                  this.props.getProducts();
                 }}
               />);
           })}
@@ -61,7 +60,6 @@ class Game extends React.Component {
 
 Game.propTypes = {
   selectWinner: React.PropTypes.func,
-  getProducts: React.PropTypes.func,
   getInit: React.PropTypes.func,
   products: React.PropTypes.array
 };
@@ -72,14 +70,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getProducts() {
-      dispatch(getData());
-    },
-    getInit(p) {
-      dispatch(getData(p));
+    getInit() {
+      dispatch(getData('random/init'));
     },
     selectWinner(id) {
-      dispatch(selectWinner(id));
+      dispatch(getData('random/' + id));
     }
   };
 };
