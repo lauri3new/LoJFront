@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 import thunk from "redux-thunk";
 import Reducer from "./reducers/index";
 import { loadState, saveState } from "./localStorage";
@@ -13,7 +13,9 @@ const configureStore = () => {
   const store = createStore(
     Reducer,
     persistedState,
-    applyMiddleware(logger(), thunk)
+    // logger in deveolpment
+    // applyMiddleware(logger(), thunk)
+    applyMiddleware(thunk)
   );
   store.subscribe(() => {
     saveState({

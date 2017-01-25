@@ -9,8 +9,7 @@ const App = (props) => {
     <div className="row">
       <Game />
     </div>
-    <div style={{ marginTop:'100vh', height: '20vh', backgroundColor: 'rgb(230,230,230)', textAlign: 'center' }}>
-      <h1 >LEAGUE OF JERSEYS</h1>
+    <div style={{ marginTop:'100vh'}} >
     </div>
     <div >
       <League />

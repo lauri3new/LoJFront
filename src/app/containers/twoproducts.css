@@ -27,20 +27,59 @@
   animation: fade-in 1500ms forwards;
 }
 
-.scrollDown {
-  color:rgb(55,55,55);
-  font-size: 60px;
-  border-radius: 80px;
-  position:absolute;
-  margin-top: 75vh;
-  z-index: 10;
+.share {
+  background-color: rgba(0, 0, 0, 0);
+  cursor: default;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: inline;
+  position: absolute;
+  z-index: 11;
+  -webkit-transition: background-color 1000ms;
+-moz-transition: background-color 1000ms;
+-o-transition: background-color 1000ms;
+transition: background-color 1000ms;
 }
 
-.scrollDown:hover {
-  color:rgb(155,155,155);
+.share:hover {
+  background-color: rgba(155,155,155,0.9);
+}
+
+.scroll {
+  background-color: rgba(0, 0, 0, 0);
+  color:rgb(55,55,55);
+  font-size: 30px;
+  border-radius: 40px;
+  padding-top: 7px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  padding-left: 12px;
+  position:absolute;
+  margin-top: 80vh;
+  font-family: "stereofidelic";
+  z-index: 10;
+  cursor: pointer;
+  -webkit-transition: background-color 1000ms;
+-moz-transition: background-color 1000ms;
+-o-transition: background-color 1000ms;
+transition: background-color 1000ms;
+-webkit-transition: color 500ms;
+-moz-transition: color 500ms;
+-o-transition: color 500ms;
+transition: color 500ms;
+}
+
+.scroll:hover {
+  background-color: rgba(155,155,155,0.9);
+  color:white;
 }
 
 .versus {
+  cursor: default;
   background-color: rgb(55,55,55);
   color:white;
   font-size: 60px;

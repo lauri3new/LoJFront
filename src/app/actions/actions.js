@@ -1,7 +1,7 @@
 export const getData = (path = "random/", type = "PRODUCTS") => {
   // dev or prod
-  // const baseUrl = "/api/";
-  const baseUrl = "http://localhost:3001/api/";
+  const baseUrl = "/api/";
+  // const baseUrl = "http://localhost:3001/api/";
   const myHeaders = new Headers();
   myHeaders.append("X-Requested-With", "XMLHttpRequest");
   return (dispatch) => {

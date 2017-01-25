@@ -1,6 +1,8 @@
 import React from "react";
+import zenscroll from "zenscroll";
 import Product from "../components/product";
 import Styles from "./twoproducts.css";
+import Share from '../components/share';
 
 class TwoProducts extends React.Component {
   constructor(props) {
@@ -26,12 +28,17 @@ class TwoProducts extends React.Component {
 
   scrollDown() {
     // TODO: implement scrollDown
+    zenscroll.toY(window.innerHeight);
   }
 
   render() {
     return (
-      <div className={Styles.twoProducts} ref="ok">
+      <div className={Styles.twoProducts} >
+        <div className={Styles.share}> <Share /> </div>
         <div className={Styles.versus}> V s </div>
+        <div className={Styles.scroll} onClick={() => {this.scrollDown();}}>
+          <span className="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+        </div>
         {this.props.products.map((product, i) => {
           return (
             <Product
