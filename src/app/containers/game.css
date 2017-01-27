@@ -1,6 +1,20 @@
+.tooltip {
+  position: absolute;
+  z-index: 10;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10vh;
+  /*background-color: rgb(55,55,55);*/
+  border-radius: 20px;
+  padding: 5px;
+  text-align: center;
+  font-size: 25px;
+  color: rgb(55,55,55);
+  cursor: default;
+}
 
 .opacityZero {
-  opacity: 0
+  animation: fade-out 2000ms forwards;
 }
 
 .enterActive {

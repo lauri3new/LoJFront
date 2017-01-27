@@ -1,3 +1,15 @@
+.tooltip {
+  position: absolute;
+  z-index: 10;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 3px;
+  text-align: center;
+  font-size: 25px;
+  color: rgb(55,55,55);
+  cursor: default;
+}
+
 .shaded {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.3);

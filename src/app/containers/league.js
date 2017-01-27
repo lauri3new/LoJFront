@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactGA from 'react-ga';
 import { getData } from "../actions/actions";
 import Styles from "./league.css";
 
@@ -23,11 +24,19 @@ class League extends React.Component {
     clearInterval(this.state.autoUpdate);
   }
 
+  purchase(ID) {
+    ReactGA.event({
+      category: 'league',
+      action: `clicked on purchase ID: ${ID} `
+    });
+  }
+
   render() {
     const wentUp = <span className={`glyphicon glyphicon-triangle-top ${Styles.increase}`} />;
     const wentDown = <span className={`glyphicon glyphicon-triangle-bottom ${Styles.decrease}`} />;
     return (
       <div className={Styles.body}>
+        <div className={Styles.tooltip}>TOP RATED JERSEYS</div>
         <ReactCSSTransitionGroup
           transitionName={Styles}
           transitionEnterTimeout={500}
@@ -46,7 +55,7 @@ class League extends React.Component {
                   </h1>
                   <h2></h2>
                   <a href={`${product.buyLink}`} target="_blank" >
-                    <div className={Styles.buy}>
+                    <div className={Styles.buy} onClick={() => this.purchase(product.ID)}>
                     {`£ ${Math.ceil(parseFloat(product.Price))}`}
                     </div>
                   </a>

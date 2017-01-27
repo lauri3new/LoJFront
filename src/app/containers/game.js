@@ -12,7 +12,8 @@ class Game extends React.Component {
     super(props);
     this.state = {
       fadeIn: Styles.enterInit,
-      opacityZero: Styles.opacityZero
+      opacityZero: Styles.opacityZero,
+      firstClick: false
     };
   }
 
@@ -29,10 +30,18 @@ class Game extends React.Component {
     });
   }
 
+  handleFirstClick() {
+    this.setState({
+      ...this.state,
+      firstClick: true
+    });
+  }
+
   render() {
     return (
 // react css transition group animates twoProducts fade out when they leave DOM
       <div className={Styles.enterInit}>
+        <div className={`${Styles.tooltip} ${this.state.firstClick === true ? Styles.opacityZero : null}`}>CLICK THE JERSEY YOU PREFER</div>
         <ReactCSSTransitionGroup
           transitionName={Styles}
           transitionEnter={false}
@@ -48,6 +57,7 @@ class Game extends React.Component {
                 styleProp={Styles}
                 style={this.state}
                 onClickProp={(id) => {
+                  this.handleFirstClick();
                   this.props.selectWinner(id);
                 }}
               />);
