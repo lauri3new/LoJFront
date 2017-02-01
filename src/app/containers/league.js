@@ -35,14 +35,14 @@ class League extends React.Component {
     const wentUp = <span className={`glyphicon glyphicon-triangle-top ${Styles.increase}`} />;
     const wentDown = <span className={`glyphicon glyphicon-triangle-bottom ${Styles.decrease}`} />;
     return (
-      <div className={Styles.body}>
+      <div className={`${Styles.body} container}`} >
         <div className={Styles.tooltip}>TOP RATED JERSEYS</div>
         <ReactCSSTransitionGroup
           transitionName={Styles}
           transitionEnterTimeout={500}
           transitionLeave={false}
         >
-          <div className={Styles.gallery} >
+          <div className={`${Styles.gallery}`} >
           {this.props.Present.map((product, i) => {
             return (
               <div className={Styles.box} key={product.ID}>

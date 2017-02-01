@@ -5,7 +5,7 @@ import League from "./league";
 // App container acts as presentation frame for app.
 const App = (props) => {
   return (
-    <div>
+    <div >
     <div className="row">
       <Game />
     </div>

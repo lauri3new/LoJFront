@@ -48,11 +48,11 @@ class Product extends React.Component {
         }}
       >
         <div className={Styles.shading} >
+            {this.state.clicked === true ? <span className={`glyphicon glyphicon-heart + ${Styles.heart}`} /> : <div className={Styles.heartEmpty}>o</div>}
           <a href={this.props.buyLink} target="_blank" >
             <button className={Styles.buy} onClick={() => this.purchase(this.props.ID)}> PURCHASE </button>
           </a>
         </div>
-        {this.state.clicked === true ? <span className={`glyphicon glyphicon-heart + ${Styles.heart}`} /> : null}
       </div>
     );
   }

@@ -6,8 +6,8 @@
   "scripts": {
     "test": "mocha --watch --compilers js:babel-register --require babel-polyfill src/app/tests/*.js",
     "start": "npm run build",
-    "build": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot --history-api-fallback",
-    "prod": "webpack -p && cp src/index.html dist/index.html"
+    "build": "webpack --config webpack.config.js -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot --history-api-fallback",
+    "prod": "webpack --config webpack.prod.config.js -p && cp src/index.html dist/index.html"
   },
   "keywords": [
     "reactjs"
@@ -24,6 +24,7 @@
     "react-share": "^1.11.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
+    "whatwg-fetch": "^2.0.2",
     "zenscroll": "^3.3.0"
   },
   "devDependencies": {

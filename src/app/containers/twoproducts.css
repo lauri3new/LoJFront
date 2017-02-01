@@ -2,8 +2,6 @@
   position: absolute;
   display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: center;
-  justify-content: center;
   height: 100%;
   width: 100%;
   background-color: white;
@@ -37,6 +35,8 @@
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   display: inline;
+  left:50%;
+  transform: translateX(-50%);
   position: absolute;
   z-index: 11;
   -webkit-transition: background-color 1000ms;
@@ -56,6 +56,8 @@ transition: background-color 1000ms;
 }
 
 .scroll {
+  left:50%;
+  transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0);
   color:rgb(55,55,55);
   font-size: 30px;
@@ -80,6 +82,7 @@ transition: background-color 1000ms;
 }
 
 .versus {
+  left:50%;
   cursor: default;
   background-color: rgb(55,55,55);
   color:white;
@@ -90,7 +93,8 @@ transition: background-color 1000ms;
   padding-right: 30px;
   padding-top: 20px;
   padding-bottom: 15px;
-  margin-top: 40vh;
+  top:50%;
+  transform: translateY(-50%) translateX(-50%);
   font-family: "stereofidelic";
   z-index: 10;
   -webkit-touch-callout: none; /* iOS Safari */
@@ -116,4 +120,30 @@ transition: background-color 1000ms;
   100% {
   opacity: 1;
   }
+}
+
+@media only screen and (max-device-width: 500px) {
+    .twoProducts {
+      flex-direction: column;
+    }
+    .boxIn {
+        height:50%;
+        width:100%;
+    }
+    .box {
+        height:50%;
+        width:100%;
+    }
+    .versus {
+
+      font-size: 30px;
+      border-radius: 60px;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 10px;
+      padding-bottom: 7.5px;
+    }
+    .scroll {
+      display: none;
+    }
 }

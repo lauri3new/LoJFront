@@ -1,6 +1,13 @@
+import 'whatwg-fetch';
+
 export const getData = (path = "random/", type = "PRODUCTS") => {
   // dev or prod
   const baseUrl = "/api/";
+  // if (process.env.NODE_ENV == 'production') {
+  //   console.log('hello production');
+  // } else {
+  //   console.log('development');
+  // }
   // const baseUrl = "http://localhost:3001/api/";
   const myHeaders = new Headers();
   myHeaders.append("X-Requested-With", "XMLHttpRequest");
