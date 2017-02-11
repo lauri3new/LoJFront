@@ -39172,7 +39172,7 @@
   \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -39187,11 +39187,11 @@
 	
 	  // dev or prod
 	  var baseUrl = "/api/";
-	  if (process.env.NODE_ENV == 'production') {
-	    console.log('hello production');
-	  } else {
-	    console.log('development');
-	  }
+	  // if (process.env.NODE_ENV == 'production') {
+	  //   console.log('hello production');
+	  // } else {
+	  //   console.log('development');
+	  // }
 	  // const baseUrl = "http://localhost:3001/api/";
 	  var myHeaders = new Headers();
 	  myHeaders.append("X-Requested-With", "XMLHttpRequest");
@@ -39245,7 +39245,6 @@
 	    payload: "okokok " + ID
 	  };
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../~/process/browser.js */ 3)))
 
 /***/ },
 /* 417 */
